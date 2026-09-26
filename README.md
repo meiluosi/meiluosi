@@ -19,13 +19,13 @@
 <!-- releases starts -->
 ### 最近发布
 
-- [md-knowledge-graph v0.8.2](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v0.8.2) · 2026-09-26
+- [md-knowledge-graph v1.0.0](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v1.0.0) · 2026-09-26
 <!-- releases ends -->
 
 <!-- repos starts -->
 ### 正在维护
 
-- [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 把 markdown 知识库的沉默失效变成 CI 红灯：失效锚点/断链/本地路径/缺失图片/标签一致性 · 基线只挡新增 · 规则可配置 · 支持无 frontmatter 的纯 markdown `JavaScript`
+- [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 【已冻结·维护模式】检查 markdown 的引用完整性与标签一致性。客观部分与 lychee 重叠，独有部分是工具发明的意见——复盘见 docs/retrospective.md `JavaScript`
 <!-- repos ends -->
 
 ---
