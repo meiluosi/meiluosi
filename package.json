@@ -1,0 +1,15 @@
+{
+  "name": "meiluosi-profile",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "GitHub 个人主页门面 —— 由脚本自动构建的 profile README",
+  "author": "枫语 (Feng Yu)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node build_readme.mjs"
+  }
+}
