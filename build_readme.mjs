@@ -107,10 +107,14 @@ async function fetchPosts() {
 		.slice(0, LIMIT);
 }
 
-/** 取用户仓库（必要时排除 fork） */
+/** 取用户仓库（排除 fork，以及门面仓库自身） */
 async function fetchRepos() {
 	const repos = await getJson(`https://api.github.com/users/${USER}/repos?per_page=100&sort=pushed`);
-	return repos.filter((r) => INCLUDE_FORKS || !r.fork);
+	return repos.filter(
+		(r) =>
+			// 门面仓库本身是基础设施，不是「项目」
+			r.name !== USER && (INCLUDE_FORKS || !r.fork),
+	);
 }
 
 /** 最近发布：遍历仓库取各自最新 release，按发布时间排序 */
