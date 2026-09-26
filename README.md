@@ -19,13 +19,13 @@
 <!-- releases starts -->
 ### 最近发布
 
-- [md-knowledge-graph v0.7.0](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v0.7.0) · 2026-09-26
+- [md-knowledge-graph v0.8.0](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v0.8.0) · 2026-09-26
 <!-- releases ends -->
 
 <!-- repos starts -->
 ### 正在维护
 
-- [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 检查 markdown 知识库：失效锚点/断链/本地路径/缺失图片/标签一致性 · 支持无 frontmatter 的纯 markdown · 基线只挡新增 · 附 GitHub Action 与 pre-commit `JavaScript`
+- [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 把 markdown 知识库的沉默失效变成 CI 红灯：失效锚点/断链/本地路径/缺失图片/标签一致性 · 基线只挡新增 · 规则可配置 · 支持无 frontmatter 的纯 markdown `JavaScript`
 <!-- repos ends -->
 
 ---
