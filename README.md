@@ -20,6 +20,9 @@
 <!-- releases ends -->
 
 <!-- repos starts -->
+### 正在维护
+
+- [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 从任意 markdown 的 frontmatter 构建知识图谱 · JSON / Mermaid / 自包含 HTML · 仅 1 个依赖 `JavaScript`
 <!-- repos ends -->
 
 ---
