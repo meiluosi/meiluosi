@@ -20,6 +20,9 @@
 <!-- releases ends -->
 
 <!-- repos starts -->
+### 正在维护
+
+- [meiluosi](https://github.com/meiluosi/meiluosi) — 枫语 · AI / 强化学习 / 因果推断 / 大语言模型 —— 由脚本自动构建的 GitHub 门面 `JavaScript`
 <!-- repos ends -->
 
 ---
