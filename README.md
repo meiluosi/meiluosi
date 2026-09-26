@@ -19,13 +19,13 @@
 <!-- releases starts -->
 ### 最近发布
 
-- [md-knowledge-graph v0.2.0](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v0.2.0) · 2026-09-26
+- [md-knowledge-graph v0.3.0](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v0.3.0) · 2026-09-26
 <!-- releases ends -->
 
 <!-- repos starts -->
 ### 正在维护
 
-- [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 从 markdown 的 frontmatter 与正文链接构建知识图谱，并检查知识库（断链 / 长尾标签 / 写法不一致）· JSON / Mermaid / HTML / 相关文章 · 仅 1 个依赖 `JavaScript`
+- [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 从 markdown 构建知识图谱并检查知识库：失效锚点 / 断链 / 标签写法不一致 · JSON / Mermaid / HTML / 相关文章 · 框架无关，读源文件 `JavaScript`
 <!-- repos ends -->
 
 ---
