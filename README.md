@@ -19,7 +19,7 @@
 <!-- releases starts -->
 ### 最近发布
 
-- [md-knowledge-graph v0.1.0](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v0.1.0) · 2026-09-26
+- [md-knowledge-graph v0.2.0](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v0.2.0) · 2026-09-26
 <!-- releases ends -->
 
 <!-- repos starts -->
