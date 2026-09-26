@@ -19,13 +19,13 @@
 <!-- releases starts -->
 ### 最近发布
 
-- [md-knowledge-graph v0.5.0](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v0.5.0) · 2026-09-26
+- [md-knowledge-graph v0.6.0](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v0.6.0) · 2026-09-26
 <!-- releases ends -->
 
 <!-- repos starts -->
 ### 正在维护
 
-- [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — markdown 知识库检查：失效锚点/断链/标签一致性，支持基线只挡新增 · 附 GitHub Action 与 pre-commit 钩子 · 也可出图谱与相关文章数据 `JavaScript`
+- [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 检查 markdown 知识库：失效锚点/断链/本地路径/缺失图片/标签一致性 · 基线只挡新增 · 附 GitHub Action 与 pre-commit · 也可出图谱与相关文章数据 `JavaScript`
 <!-- repos ends -->
 
 ---
