@@ -25,6 +25,7 @@
 <!-- repos starts -->
 ### 正在维护
 
+- [strandbeest-evolution](https://github.com/meiluosi/strandbeest-evolution) — Strandbeest / Jansen linkage: kinematics, evolutionary optimization, interactive demos `TypeScript`
 - [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 【已冻结·维护模式】检查 markdown 的引用完整性与标签一致性。客观部分与 lychee 重叠，独有部分是工具发明的意见——复盘见 docs/retrospective.md `JavaScript`
 <!-- repos ends -->
 
