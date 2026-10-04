@@ -25,6 +25,8 @@
 <!-- repos starts -->
 ### 正在维护
 
+- [zh-disambiguate-skill](https://github.com/meiluosi/zh-disambiguate-skill) — 消歧中文：把简体中文改写成 agent 只有一种读法的文字。工具描述、系统提示词、报错信息、运维步骤。Claude Code skill + 零依赖 linter。 `Python`
+- [rewrite-fidelity-skill](https://github.com/meiluosi/rewrite-fidelity-skill) — Check that a rewrite kept the meaning: numbers, literals, conditions, bounds, negation, and modal strength (MUST/SHOULD/MAY, 必须/建议/可以). English + Chinese. Claude Code skill. `Python`
 - [strandbeest-evolution](https://github.com/meiluosi/strandbeest-evolution) — Strandbeest / Jansen linkage: kinematics, evolutionary optimization, interactive demos `TypeScript`
 - [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 【已冻结·维护模式】检查 markdown 的引用完整性与标签一致性。客观部分与 lychee 重叠，独有部分是工具发明的意见——复盘见 docs/retrospective.md `JavaScript`
 <!-- repos ends -->
