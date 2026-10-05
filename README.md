@@ -9,7 +9,7 @@
 <!-- posts starts -->
 ### 最新文章
 
-- [1B模型全链路实验计划：MacBook Air M4 本地实战](https://meiluosi.github.io/posts/2026-07-08-1b%E6%A8%A1%E5%9E%8B%E5%85%A8%E9%93%BE%E8%B7%AF%E5%AE%9E%E9%AA%8C%E8%AE%A1%E5%88%92/) · 2026-07-08
+- [从数据到部署：在 Mac 上规划小模型全链路训练](https://meiluosi.github.io/posts/2026-07-08-1b%E6%A8%A1%E5%9E%8B%E5%85%A8%E9%93%BE%E8%B7%AF%E5%AE%9E%E9%AA%8C%E8%AE%A1%E5%88%92/) · 2026-07-08
 - [LLM推理优化与部署](https://meiluosi.github.io/posts/2024-10-27-llm%E6%8E%A8%E7%90%86%E4%BC%98%E5%8C%96%E4%B8%8E%E9%83%A8%E7%BD%B2/) · 2024-10-27
 - [多模态大模型技术](https://meiluosi.github.io/posts/2024-10-20-%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8A%80%E6%9C%AF/) · 2024-10-20
 - [LLM Agent开发指南](https://meiluosi.github.io/posts/2024-10-13-llm-agent%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/) · 2024-10-13
@@ -19,15 +19,17 @@
 <!-- releases starts -->
 ### 最近发布
 
+- [zh-disambiguate-skill v0.1.0](https://github.com/meiluosi/zh-disambiguate-skill/releases/tag/v0.1.0) · 2026-10-04
+- [rewrite-fidelity-skill v0.1.0](https://github.com/meiluosi/rewrite-fidelity-skill/releases/tag/v0.1.0) · 2026-10-04
 - [md-knowledge-graph v1.0.0](https://github.com/meiluosi/md-knowledge-graph/releases/tag/v1.0.0) · 2026-09-26
 <!-- releases ends -->
 
 <!-- repos starts -->
 ### 正在维护
 
+- [strandbeest-evolution](https://github.com/meiluosi/strandbeest-evolution) — Strandbeest / Jansen linkage: kinematics, evolutionary optimization, interactive demos `Python`
 - [zh-disambiguate-skill](https://github.com/meiluosi/zh-disambiguate-skill) — 消歧中文：把简体中文改写成 agent 只有一种读法的文字。工具描述、系统提示词、报错信息、运维步骤。Claude Code skill + 零依赖 linter。 `Python`
 - [rewrite-fidelity-skill](https://github.com/meiluosi/rewrite-fidelity-skill) — Check that a rewrite kept the meaning: numbers, literals, conditions, bounds, negation, and modal strength (MUST/SHOULD/MAY, 必须/建议/可以). English + Chinese. Claude Code skill. `Python`
-- [strandbeest-evolution](https://github.com/meiluosi/strandbeest-evolution) — Strandbeest / Jansen linkage: kinematics, evolutionary optimization, interactive demos `TypeScript`
 - [md-knowledge-graph](https://github.com/meiluosi/md-knowledge-graph) — 【已冻结·维护模式】检查 markdown 的引用完整性与标签一致性。客观部分与 lychee 重叠，独有部分是工具发明的意见——复盘见 docs/retrospective.md `JavaScript`
 <!-- repos ends -->
 
