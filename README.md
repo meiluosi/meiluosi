@@ -12,6 +12,14 @@
 
 调整连杆，观察步态，探索设计、仿真与制造之间的关系。已有连杆编辑器、仿真回放和打印包导出。
 
+<p align="center">
+  <a href="https://github.com/meiluosi/strandbeest-evolution">
+    <img src="https://raw.githubusercontent.com/meiluosi/strandbeest-evolution/main/docs/assets/walker.gif" alt="风力兽连杆运动示意：多条腿以不同相位交替迈步" width="640" height="300" />
+  </a>
+  <br />
+  <sub>Jansen 连杆运动示意 · 点击动图查看项目</sub>
+</p>
+
 **状态：alpha；尚未用真实硬件验证。**
 
 [看演示与源码](https://github.com/meiluosi/strandbeest-evolution)
