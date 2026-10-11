@@ -1,222 +1,158 @@
 #!/usr/bin/env node
 /**
- * 构建 GitHub 门面 README（模式 B：门面即构建产物）。
- *
- * 设计原则
- *   1. 区块按需生长 —— 某数据源为空时，该区块渲染为空（markdown 里不可见），
- *      但标记始终保留，所以以后有内容会「自动长出来」，无需改代码。
- *   2. 零依赖 —— 只用 Node 内置 fetch / fs，CI 不需要 npm install。
- *   3. 幂等 —— 数据没变则输出相同，CI 靠 git diff 判断是否提交，不产生空提交。
- *
- * 运行：node build_readme.mjs
- * 可选环境变量：GITHUB_TOKEN（CI 里用 secrets.GITHUB_TOKEN，避免 60 次/小时的限流）
+ * 只更新 README 中的文章与发布区块。代表作品与项目状态人工维护。
+ * 零依赖；抓取失败保留上次内容，成功确认无数据才清空对应区块。
  */
-
 import { readFile, writeFile } from "node:fs/promises";
-
-// ---------------------------------------------------------------- 配置区
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 
 const USER = "meiluosi";
-const BLOG_URL = "https://meiluosi.github.io";
-const FEED_URL = `${BLOG_URL}/rss.xml`;
+const FEED_URL = "https://meiluosi.github.io/rss.xml";
+const LIMIT = 3;
 
-/** 每个区块最多显示几条 */
-const LIMIT = 5;
-
-/**
- * 是否把 fork 仓库也算进「最近发布 / 正在维护」。
- * 默认 false —— fork 是别人的作品，研究工程风只展示你自己的。
- * 想让博客仓库也出现，把这里改成 true 即可。
- */
-const INCLUDE_FORKS = false;
-
+// 显式选择当前项目。冻结项目与复盘在 README 中单独介绍。
+const RELEASE_REPOS = [
+	"strandbeest-evolution",
+	"zh-disambiguate-skill",
+	"rewrite-fidelity-skill",
+];
 const README_PATH = new URL("./README.md", import.meta.url);
 
-// ---------------------------------------------------------------- 工具
-
-const TOKEN = process.env.GITHUB_TOKEN || "";
-
-const HEADERS = {
-	"User-Agent": `${USER}-profile-readme-build`,
-	Accept: "application/vnd.github+json",
-	...(TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}),
-};
-
-async function getJson(url) {
-	const res = await fetch(url, { headers: HEADERS });
-	if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText} <- ${url}`);
-	return res.json();
-}
-
-async function getText(url) {
-	const res = await fetch(url, { headers: { "User-Agent": HEADERS["User-Agent"] } });
-	if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText} <- ${url}`);
-	return res.text();
-}
-
-function decodeEntities(s) {
+function clean(value) {
 	const named = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " };
-	return s
+	return value
+		.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+		.replace(/<[^>]*>/g, "")
 		.replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
 		.replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(Number.parseInt(h, 16)))
-		.replace(/&([a-z]+);/gi, (m, n) => named[n.toLowerCase()] ?? m);
+		.replace(/&([a-z]+);/gi, (m, n) => named[n.toLowerCase()] ?? m)
+		.replace(/\s+/g, " ")
+		.trim();
 }
 
-function stripTags(s) {
-	return s.replace(/<[^>]*>/g, "");
+function label(value) {
+	return value.replace(/[\\\x60*_[\]<>]/g, "\\$&");
 }
 
-function clean(s) {
-	return decodeEntities(stripTags(s)).replace(/\s+/g, " ").trim();
-}
-
-/** RFC822 / ISO 日期 → YYYY-MM-DD；解析不出就返回空串 */
-function fmtDate(input) {
-	if (!input) return "";
-	const d = new Date(input);
-	if (Number.isNaN(d.getTime())) return "";
-	return d.toISOString().slice(0, 10);
-}
-
-/** 读取标记之间已有的内容（用于判断是否需要重写文件） */
-function replaceRegion(text, name, body) {
-	const re = new RegExp(`(<!-- ${name} starts -->)[\\s\\S]*?(<!-- ${name} ends -->)`);
-	if (!re.test(text)) {
-		throw new Error(`README 里找不到标记对：<!-- ${name} starts --> ... <!-- ${name} ends -->`);
+function safeUrl(value) {
+	const url = new URL(value);
+	if (url.protocol !== "https:" && url.protocol !== "http:") {
+		throw new Error("不支持的链接协议");
 	}
-	const replacement = body ? `$1\n${body}\n$2` : "$1\n$2";
-	return text.replace(re, replacement);
+	return url.href.replace(/\(/g, "%28").replace(/\)/g, "%29");
 }
 
-// ---------------------------------------------------------------- 数据源
-
-/** 最新文章：从博客 RSS 抓（这是门面唯一「第一天就有内容」的来源） */
-async function fetchPosts() {
-	const xml = await getText(FEED_URL);
-	const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map((m) => m[1]);
-
-	return items
-		.map((item) => {
-			const pick = (tag) => {
-				const m = item.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`));
-				return m ? clean(m[1]) : "";
-			};
-			return { title: pick("title"), link: pick("link"), date: fmtDate(pick("pubDate")) };
-		})
-		.filter((p) => p.title && p.link)
-		.slice(0, LIMIT);
+function fmtDate(input) {
+	const date = new Date(input);
+	return input && !Number.isNaN(date.getTime()) ? date.toISOString().slice(0, 10) : "";
 }
 
-/** 取用户仓库（排除 fork，以及门面仓库自身） */
-async function fetchRepos() {
-	const repos = await getJson(`https://api.github.com/users/${USER}/repos?per_page=100&sort=pushed`);
-	return repos.filter(
-		(r) =>
-			// 门面仓库本身是基础设施，不是「项目」
-			r.name !== USER && (INCLUDE_FORKS || !r.fork),
-	);
+function replaceRegion(text, name, body) {
+	const re = new RegExp("(<!-- " + name + " starts -->)[\\s\\S]*?(<!-- " + name + " ends -->)");
+	if (!re.test(text)) throw new Error("README 缺少区块标记：" + name);
+	return text.replace(re, (_, start, end) => start + "\n" + (body ? body + "\n" : "") + end);
 }
 
-/** 最近发布：遍历仓库取各自最新 release，按发布时间排序 */
-async function fetchReleases(repos) {
-	const found = [];
-	for (const repo of repos) {
-		try {
-			const releases = await getJson(
-				`https://api.github.com/repos/${repo.full_name}/releases?per_page=1`,
-			);
-			const r = releases[0];
-			if (r) {
-				found.push({
-					name: `${repo.name} ${r.tag_name}`,
-					link: r.html_url,
-					date: fmtDate(r.published_at),
-					pre: Boolean(r.prerelease),
-				});
-			}
-		} catch (err) {
-			console.warn(`  ! release 查询失败 ${repo.full_name}: ${err.message}`);
+async function request(url, fetchImpl, token, json = false) {
+	const headers = { "User-Agent": USER + "-profile-readme-build" };
+	if (json) {
+		headers.Accept = "application/vnd.github+json";
+		if (token) headers.Authorization = "Bearer " + token;
+	}
+	const response = await fetchImpl(url, { headers, signal: AbortSignal.timeout(15000) });
+	if (!response.ok) throw new Error("HTTP " + response.status + " <- " + url);
+	return json ? response.json() : response.text();
+}
+
+async function fetchPosts(fetchImpl, token) {
+	const xml = await request(FEED_URL, fetchImpl, token);
+	if (!/<rss[\s>]/i.test(xml) || !/<\/channel\s*>/i.test(xml) || !/<\/rss\s*>/i.test(xml)) {
+		throw new Error("RSS 响应格式不完整");
+	}
+	const items = [...xml.matchAll(/<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/g)];
+	const openings = xml.match(/<item(?=[\s/>])/g) || [];
+	const closings = xml.match(/<\/item\s*>/g) || [];
+	if (!/<channel(?:\s[^>]*)?>/i.test(xml) || openings.length !== items.length || closings.length !== items.length) {
+		throw new Error("RSS 条目结构不完整");
+	}
+	return items.slice(0, LIMIT).map(([, item]) => {
+		const pick = (tag) => clean(item.match(new RegExp("<" + tag + "(?:\\s[^>]*)?>([\\s\\S]*?)<\\/" + tag + ">"))?.[1] ?? "");
+		const title = pick("title");
+		const link = pick("link");
+		if (!title || !link) throw new Error("RSS 条目缺少标题或链接");
+		return { title, link: safeUrl(link), date: fmtDate(pick("pubDate")) };
+	});
+}
+
+async function fetchReleases(fetchImpl, token) {
+	// 任一仓库查询失败则保留整个旧区块，避免把部分结果当成完整快照。
+	const groups = await Promise.all(RELEASE_REPOS.map(async (name) => {
+		const data = await request(
+			"https://api.github.com/repos/" + USER + "/" + name + "/releases?per_page=1",
+			fetchImpl, token, true,
+		);
+		if (!Array.isArray(data)) throw new Error("发布响应不是列表：" + name);
+		const release = data[0];
+		if (!release) return [];
+		if (!release.tag_name || !release.html_url || !fmtDate(release.published_at)) {
+			throw new Error("发布记录缺少字段：" + name);
+		}
+		return [{
+			name: name + " " + release.tag_name,
+			link: safeUrl(release.html_url),
+			date: fmtDate(release.published_at),
+			pre: Boolean(release.prerelease),
+		}];
+	}));
+	return groups.flat().sort((a, b) => b.date.localeCompare(a.date) || a.name.localeCompare(b.name)).slice(0, LIMIT);
+}
+
+export async function updateReadme(readme, { fetchImpl = fetch, token = process.env.GITHUB_TOKEN || "", warn = console.warn } = {}) {
+	const sections = [
+		{
+			name: "posts",
+			fetch: () => fetchPosts(fetchImpl, token),
+			render: (items) => items.length ? "### 最新文章\n\n" + items.map((p) =>
+				"- [" + label(p.title) + "](" + p.link + ")" + (p.date ? " · " + p.date : "")
+			).join("\n") : "",
+		},
+		{
+			name: "releases",
+			fetch: () => fetchReleases(fetchImpl, token),
+			render: (items) => items.length ? "### 最近发布\n\n" + items.map((r) =>
+				"- [" + label(r.name) + "](" + r.link + ") · " + r.date + (r.pre ? " \u0060pre\u0060" : "")
+			).join("\n") : "",
+		},
+	];
+	for (const section of sections) replaceRegion(readme, section.name, "");
+	const results = await Promise.allSettled(sections.map((section) => section.fetch()));
+	for (const [index, result] of results.entries()) {
+		const section = sections[index];
+		if (result.status === "fulfilled") {
+			readme = replaceRegion(readme, section.name, section.render(result.value));
+		} else {
+			warn("保留上次 " + section.name + " 内容：" + result.reason.message);
 		}
 	}
-	return found
-		.sort((a, b) => (b.date || "").localeCompare(a.date || ""))
-		.slice(0, LIMIT);
+	return readme;
 }
-
-// ---------------------------------------------------------------- 区块渲染
-
-function renderPosts(posts) {
-	if (!posts.length) return "";
-	const lines = posts.map((p) => `- [${p.title}](${p.link})${p.date ? ` · ${p.date}` : ""}`);
-	return `### 最新文章\n\n${lines.join("\n")}`;
-}
-
-function renderReleases(releases) {
-	if (!releases.length) return "";
-	const lines = releases.map(
-		(r) => `- [${r.name}](${r.link})${r.date ? ` · ${r.date}` : ""}${r.pre ? " `pre`" : ""}`,
-	);
-	return `### 最近发布\n\n${lines.join("\n")}`;
-}
-
-function renderRepos(repos) {
-	if (!repos.length) return "";
-	const lines = repos.map((r) => {
-		const desc = r.description ? ` — ${r.description}` : "";
-		const lang = r.language ? ` \`${r.language}\`` : "";
-		return `- [${r.name}](${r.html_url})${desc}${lang}`;
-	});
-	return `### 正在维护\n\n${lines.join("\n")}`;
-}
-
-// ---------------------------------------------------------------- 主流程
 
 async function main() {
-	let readme = await readFile(README_PATH, "utf8");
-
-	console.log(`抓取 ${FEED_URL} ...`);
-	let posts = [];
-	try {
-		posts = await fetchPosts();
-		console.log(`  ✓ ${posts.length} 篇文章`);
-	} catch (err) {
-		console.warn(`  ! RSS 抓取失败，跳过该区块: ${err.message}`);
+	const before = await readFile(README_PATH, "utf8");
+	const after = await updateReadme(before);
+	if (after === before) {
+		console.log("README 无变化。");
+		return;
 	}
-
-	console.log(`抓取 ${USER} 的仓库 ...`);
-	let repos = [];
-	try {
-		repos = await fetchRepos();
-		console.log(`  ✓ ${repos.length} 个自有仓库（fork=${INCLUDE_FORKS ? "计入" : "排除"}）`);
-	} catch (err) {
-		console.warn(`  ! 仓库抓取失败，跳过相关区块: ${err.message}`);
-	}
-
-	console.log("抓取 releases ...");
-	const releases = await fetchReleases(repos);
-	console.log(`  ✓ ${releases.length} 条发布`);
-
-	readme = replaceRegion(readme, "posts", renderPosts(posts));
-	readme = replaceRegion(readme, "releases", renderReleases(releases));
-	readme = replaceRegion(readme, "repos", renderRepos(repos));
-
-	await writeFile(README_PATH, readme, "utf8");
-
-	const empty = [
-		["最新文章", posts.length],
-		["最近发布", releases.length],
-		["正在维护", repos.length],
-	]
-		.filter(([, n]) => n === 0)
-		.map(([name]) => name);
-
-	console.log("✓ README.md 已更新");
-	if (empty.length) {
-		console.log(`  当前为空的区块（已渲染为空，有内容后会自动出现）: ${empty.join("、")}`);
-	}
+	await writeFile(README_PATH, after, "utf8");
+	console.log("已更新 README 的动态区块。");
 }
 
-main().catch((err) => {
-	console.error(`✗ 构建失败: ${err.message}`);
-	process.exit(1);
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+	main().catch((err) => {
+		console.error("构建失败：" + err.message);
+		process.exitCode = 1;
+	});
+}
+

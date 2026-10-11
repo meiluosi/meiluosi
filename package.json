@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "GitHub 个人主页门面 —— 由脚本自动构建的 profile README",
+  "description": "枫语的 GitHub 个人主页：精选作品、写作与自动更新的近况",
   "author": "枫语 (Feng Yu)",
   "license": "MIT",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "build": "node build_readme.mjs"
+    "build": "node build_readme.mjs",
+    "test": "node --test build_readme.test.mjs"
   }
 }
+

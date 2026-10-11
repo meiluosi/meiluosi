@@ -11,6 +11,8 @@ on:
     branches: [main]
     paths:
       - "build_readme.mjs"
+      - "build_readme.test.mjs"
+      - "package.json"
       - ".github/workflows/build.yml"
 
 permissions:
@@ -31,6 +33,9 @@ jobs:
           node-version: "24"
 
       # 零依赖，无需 npm install
+      - name: Test README refresh
+        run: node --test build_readme.test.mjs
+
       - name: Build README
         run: node build_readme.mjs
         env:
@@ -62,3 +67,4 @@ jobs:
 
           echo "结果：推送连续失败，请人工检查。" >&2
           exit 1
+
