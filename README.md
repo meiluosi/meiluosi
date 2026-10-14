@@ -38,6 +38,29 @@
 
 [看实现与实验记录](https://github.com/meiluosi/meiluosi.github.io/tree/master/projects/small-model-lab) · [打开模型工作台](https://meiluosi.github.io/lab/model-pipeline/)
 
+## Claude Skills
+
+我做的 [Claude](https://claude.ai) skill，按用途分组。每个仓库都有中英文 README、示例，以及对效果的诚实评估。
+
+### 学习、规划、写作、做图（一条可选的链）
+
+从学明白一项技术，到把它写出来、做成图文。每一环单独能用，也可以接起来用。
+
+| Skill | 做什么 |
+|---|---|
+| [research-learning](https://github.com/meiluosi/research-learning) | 学习机器学习和大模型技术：五步讲课，每个论断标明是论文说的、推导的还是未检验的；验证和实验只在需要时才做 |
+| [content-topic-decomposer](https://github.com/meiluosi/content-topic-decomposer) | 把一个主题拆成均衡的内容规划：五种内容类型 × 读者阶段 × 形式，以及一段经历的多种复用 |
+| [human-in-the-loop-writing](https://github.com/meiluosi/human-in-the-loop-writing) | 用 AI 写作但不丢掉自己：研究、起草、体检、学习你的修改规则 |
+| [content-card-designer](https://github.com/meiluosi/content-card-designer) | 把内容做成图文卡片、封面和头像：文字由浏览器排版，导出前先质检 |
+
+### 让文字更准确
+
+| Skill | 做什么 |
+|---|---|
+| [zh-disambiguate-skill](https://github.com/meiluosi/zh-disambiguate-skill) | 把简体中文改写成 agent 只有一种读法的文字 |
+| [rewrite-fidelity-skill](https://github.com/meiluosi/rewrite-fidelity-skill) | 检查改写有没有改变数字、字面量、条件、否定和语气强度 |
+| [research-writing-skills](https://github.com/meiluosi/research-writing-skills) | 可信实验与清晰结果写作：预注册、独立复核、文档级编辑、保真检查 |
+
 ## 写作与笔记
 
 阅读、实验，以及做东西时遇到的问题。更多内容在 [meiluosi.github.io](https://meiluosi.github.io/)。
