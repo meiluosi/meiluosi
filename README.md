@@ -76,8 +76,8 @@
 <!-- releases starts -->
 ### 最近发布
 
-- [rewrite-fidelity-skill v0.1.1](https://github.com/meiluosi/rewrite-fidelity-skill/releases/tag/v0.1.1) · 2026-10-05
-- [zh-disambiguate-skill v0.1.1](https://github.com/meiluosi/zh-disambiguate-skill/releases/tag/v0.1.1) · 2026-10-05
+- [rewrite-fidelity-skill v0.1.2](https://github.com/meiluosi/rewrite-fidelity-skill/releases/tag/v0.1.2) · 2026-10-14
+- [zh-disambiguate-skill v0.1.2](https://github.com/meiluosi/zh-disambiguate-skill/releases/tag/v0.1.2) · 2026-10-14
 <!-- releases ends -->
 
 ## 实验复盘
