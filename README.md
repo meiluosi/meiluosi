@@ -69,8 +69,8 @@
 ### 最新文章
 
 - [从数据到部署：在 Mac 上规划小模型全链路训练](https://meiluosi.github.io/posts/2026-07-08-1b%E6%A8%A1%E5%9E%8B%E5%85%A8%E9%93%BE%E8%B7%AF%E5%AE%9E%E9%AA%8C%E8%AE%A1%E5%88%92/) · 2026-07-08
-- [LLM推理优化与部署](https://meiluosi.github.io/posts/2024-10-27-llm%E6%8E%A8%E7%90%86%E4%BC%98%E5%8C%96%E4%B8%8E%E9%83%A8%E7%BD%B2/) · 2024-10-27
-- [多模态大模型技术](https://meiluosi.github.io/posts/2024-10-20-%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8A%80%E6%9C%AF/) · 2024-10-20
+- [构建一份可追溯的小型预训练语料](https://meiluosi.github.io/posts/2026-10-15-llm-training-data-06-build/) · 2026-10-15
+- [中英文数据怎样混合：从语料比例到实际训练分布](https://meiluosi.github.io/posts/2026-10-15-llm-training-data-05-mixture/) · 2026-10-15
 <!-- posts ends -->
 
 <!-- releases starts -->
