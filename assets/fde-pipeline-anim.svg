@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 235" width="100%" height="235" role="img" aria-label="FDE证据驱动交付系列工作流：从行业速成、问题定义、路线选型、知识库诊断到客户Demo与事前登记试点，沟通贯穿全程">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-sub: #334155;
+      --text-muted: #64748b;
+      --indigo: #4f46e5;
+      --indigo-soft: #eef2ff;
+      --blue: #2563eb;
+      --teal: #0d9488;
+      --teal-soft: #f0fdfa;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --track: #cbd5e1;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --card: #161b22;
+        --border: #30363d;
+        --text-main: #f0f6fc;
+        --text-sub: #c9d1d9;
+        --text-muted: #8b949e;
+        --indigo: #818cf8;
+        --indigo-soft: #1e1b4b;
+        --blue: #58a6ff;
+        --teal: #2dd4bf;
+        --teal-soft: #0f292a;
+        --amber: #fbbf24;
+        --rose: #fb7185;
+        --track: #30363d;
+      }
+    }
+    .font { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; }
+    .frame { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; }
+    .stage { fill: var(--card); stroke: var(--border); stroke-width: 1.2; }
+    .comms-bar { fill: var(--indigo-soft); stroke: var(--indigo); stroke-width: 1; stroke-dasharray: 5 3; }
+    .title { fill: var(--text-main); font-size: 12px; font-weight: 700; }
+    .sub { fill: var(--text-sub); font-size: 10.5px; }
+    .muted { fill: var(--text-muted); font-size: 9.5px; }
+    .pipe { stroke: var(--track); stroke-width: 2; }
+    .token {
+      fill: var(--indigo);
+      animation: moveToken 7.5s ease-in-out infinite;
+    }
+    @keyframes moveToken {
+      0% { transform: translateX(0px); opacity: 0.9; }
+      18% { transform: translateX(142px); }
+      36% { transform: translateX(284px); }
+      54% { transform: translateX(426px); }
+      72% { transform: translateX(568px); }
+      90%, 100% { transform: translateX(710px); opacity: 1; }
+    }
+  </style>
+
+  <rect class="frame" x="2" y="2" width="876" height="231" rx="12" />
+
+  <!-- Top Header -->
+  <text class="font" x="20" y="27" font-size="13" font-weight="700" fill="var(--text-main)">FDE Skill 系列 · 独立运行、产物衔接的证据驱动交付链</text>
+  <text class="mono muted" x="860" y="27" text-anchor="end">Proceed · Investigate · Iterate · Non-AI · Stop-Defer</text>
+
+  <!-- Pipeline Backbone & Animated Token -->
+  <line class="pipe" x1="80" y1="86" x2="795" y2="86" />
+  <circle class="token" cx="80" cy="86" r="5" />
+
+  <!-- 1: fde-ramp -->
+  <g transform="translate(18, 42)">
+    <rect class="stage" x="0" y="0" width="128" height="90" rx="8" />
+    <rect x="0" y="0" width="128" height="3.5" rx="2" fill="var(--blue)" />
+    <text class="mono muted" x="10" y="19" fill="var(--blue)" font-weight="700">01 · fde-ramp</text>
+    <text class="font title" x="10" y="38">行业速成基本盘</text>
+    <text class="font sub" x="10" y="55">全链路图 + 50词行话</text>
+    <text class="font muted" x="10" y="73">拿错图去被一线员工改</text>
+  </g>
+
+  <!-- 2: fde-problem-framing -->
+  <g transform="translate(160, 42)">
+    <rect class="stage" x="0" y="0" width="128" height="90" rx="8" />
+    <rect x="0" y="0" width="128" height="3.5" rx="2" fill="var(--indigo)" />
+    <text class="mono muted" x="10" y="19" fill="var(--indigo)" font-weight="700">02 · framing</text>
+    <text class="font title" x="10" y="38">业务问题定义</text>
+    <text class="font sub" x="10" y="55">竞争解释与最小验证</text>
+    <text class="font muted" x="10" y="73">同台比较非 AI 与 AI</text>
+  </g>
+
+  <!-- 3: fde-route-selection -->
+  <g transform="translate(302, 42)">
+    <rect class="stage" x="0" y="0" width="128" height="90" rx="8" />
+    <rect x="0" y="0" width="128" height="3.5" rx="2" fill="var(--teal)" />
+    <text class="mono muted" x="10" y="19" fill="var(--teal)" font-weight="700">03 · route</text>
+    <text class="font title" x="10" y="38">路线与模型选型</text>
+    <text class="font sub" x="10" y="55">先过滤合规部署硬约束</text>
+    <text class="font muted" x="10" y="73">客户样本比选质量/成本</text>
+  </g>
+
+  <!-- 4: fde-knowledge-base -->
+  <g transform="translate(444, 42)">
+    <rect class="stage" x="0" y="0" width="128" height="90" rx="8" />
+    <rect x="0" y="0" width="128" height="3.5" rx="2" fill="var(--teal)" />
+    <text class="mono muted" x="10" y="19" fill="var(--teal)" font-weight="700">04 · kb (RAG)</text>
+    <text class="font title" x="10" y="38">企业知识库判断</text>
+    <text class="font sub" x="10" y="55">文档摸底·治理·评测集</text>
+    <text class="font muted" x="10" y="73">检索/生成/知识三层定位</text>
+  </g>
+
+  <!-- 5: fde-demo -->
+  <g transform="translate(586, 42)">
+    <rect class="stage" x="0" y="0" width="128" height="90" rx="8" />
+    <rect x="0" y="0" width="128" height="3.5" rx="2" fill="var(--amber)" />
+    <text class="mono muted" x="10" y="19" fill="var(--amber)" font-weight="700">05 · fde-demo</text>
+    <text class="font title" x="10" y="38">客户 Demo 复盘</text>
+    <text class="font sub" x="10" y="55">彩排红线·原话与解读分离</text>
+    <text class="font muted" x="10" y="73">看客户做了什么而非说什么</text>
+  </g>
+
+  <!-- 6: fde-pilot -->
+  <g transform="translate(728, 42)">
+    <rect class="stage" x="0" y="0" width="134" height="90" rx="8" />
+    <rect x="0" y="0" width="134" height="3.5" rx="2" fill="var(--rose)" />
+    <text class="mono muted" x="10" y="19" fill="var(--rose)" font-weight="700">06 · fde-pilot</text>
+    <text class="font title" x="10" y="38">事前登记试点</text>
+    <text class="font sub" x="10" y="55">期中检查·复核纠错计入成本</text>
+    <text class="font muted" x="10" y="73">三轴独立判定成效</text>
+  </g>
+
+  <!-- Spanning Cross-Stage Layer: fde-comms -->
+  <g transform="translate(18, 146)">
+    <rect class="comms-bar" x="0" y="0" width="844" height="44" rx="8" />
+    <text class="mono title" x="16" y="20" fill="var(--indigo)">↔ fde-comms（贯穿全周期的关键沟通）</text>
+    <text class="font sub" x="280" y="20">会前访谈提纲 · 会后纪要与复述校准 · 高管一页纸 · 坏消息与风险上行稿</text>
+    <text class="font muted" x="16" y="36">各仓库零第三方依赖，可单独安装运行，通过显式产物（定义卡、简报、评测表、试点方案）衔接。</text>
+  </g>
+
+  <!-- Bottom Legend -->
+  <text class="font muted" x="20" y="214">原则：指标与停止条件事前登记，禁止事后替换指标；使用量 ≠ 业务价值，准确率提升 ≠ 节时（人工复核与纠错计入业务指标）。</text>
+</svg>

@@ -9,13 +9,27 @@ import { pathToFileURL } from "node:url";
 
 const USER = "meiluosi";
 const FEED_URL = "https://meiluosi.github.io/rss.xml";
-const LIMIT = 3;
+const LIMIT = 5;
 
-// 显式选择当前项目。冻结项目与复盘在 README 中单独介绍。
+// 显式选择当前活跃项目。冻结项目（如 md-knowledge-graph）在 README 中单独复盘介绍。
 const RELEASE_REPOS = [
+	"fly-connectome-study",
+	"agent-composition-review",
+	"fde-problem-framing",
+	"fde-route-selection",
+	"fde-ramp",
+	"fde-knowledge-base",
+	"fde-demo",
+	"fde-pilot",
+	"fde-comms",
 	"strandbeest-evolution",
 	"zh-disambiguate-skill",
 	"rewrite-fidelity-skill",
+	"research-writing-skills",
+	"research-learning",
+	"human-in-the-loop-writing",
+	"content-topic-decomposer",
+	"content-card-designer",
 ];
 const README_PATH = new URL("./README.md", import.meta.url);
 
@@ -76,13 +90,16 @@ async function fetchPosts(fetchImpl, token) {
 	if (!/<channel(?:\s[^>]*)?>/i.test(xml) || openings.length !== items.length || closings.length !== items.length) {
 		throw new Error("RSS 条目结构不完整");
 	}
-	return items.slice(0, LIMIT).map(([, item]) => {
-		const pick = (tag) => clean(item.match(new RegExp("<" + tag + "(?:\\s[^>]*)?>([\\s\\S]*?)<\\/" + tag + ">"))?.[1] ?? "");
-		const title = pick("title");
-		const link = pick("link");
-		if (!title || !link) throw new Error("RSS 条目缺少标题或链接");
-		return { title, link: safeUrl(link), date: fmtDate(pick("pubDate")) };
-	});
+	return items
+		.map(([, item]) => {
+			const pick = (tag) => clean(item.match(new RegExp("<" + tag + "(?:\\s[^>]*)?>([\\s\\S]*?)<\\/" + tag + ">"))?.[1] ?? "");
+			const title = pick("title");
+			const link = pick("link");
+			if (!title || !link) throw new Error("RSS 条目缺少标题或链接");
+			return { title, link: safeUrl(link), date: fmtDate(pick("pubDate")) };
+		})
+		.sort((a, b) => (b.date || "").localeCompare(a.date || ""))
+		.slice(0, LIMIT);
 }
 
 async function fetchReleases(fetchImpl, token) {
@@ -155,4 +172,3 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
 		process.exitCode = 1;
 	});
 }
-

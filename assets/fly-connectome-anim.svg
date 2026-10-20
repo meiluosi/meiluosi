@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 270" width="100%" height="270" role="img" aria-label="果蝇蘑菇体连接组预注册检验示意：65个嗅觉小球到2045个Kenyon细胞再到49个输出神经元，对比打乱与随机稀疏对照">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-sub: #334155;
+      --text-muted: #64748b;
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --teal: #0d9488;
+      --teal-soft: #ccfbf1;
+      --amber: #d97706;
+      --amber-soft: #fef3c7;
+      --slate: #64748b;
+      --wire: #cbd5e1;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --panel: #161b22;
+        --border: #30363d;
+        --text-main: #f0f6fc;
+        --text-sub: #c9d1d9;
+        --text-muted: #8b949e;
+        --blue: #58a6ff;
+        --blue-soft: #1f2937;
+        --teal: #2dd4bf;
+        --teal-soft: #112222;
+        --amber: #f59e0b;
+        --amber-soft: #292014;
+        --slate: #8b949e;
+        --wire: #30363d;
+      }
+    }
+    .font { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; }
+    .frame { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; }
+    .panel { fill: var(--panel); stroke: var(--border); stroke-width: 1; }
+    .h1 { fill: var(--text-main); font-size: 13px; font-weight: 700; }
+    .h2 { fill: var(--text-sub); font-size: 11.5px; font-weight: 600; }
+    .txt { fill: var(--text-sub); font-size: 11px; }
+    .muted { fill: var(--text-muted); font-size: 10px; }
+    .synapse { stroke: var(--wire); stroke-width: 1.2; fill: none; }
+    .spike-1 {
+      stroke: var(--blue);
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 18 140;
+      animation: spikeFlow 2.6s linear infinite;
+    }
+    .spike-2 {
+      stroke: var(--teal);
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 18 140;
+      animation: spikeFlow 2.6s linear 0.9s infinite;
+    }
+    .spike-3 {
+      stroke: var(--amber);
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 18 140;
+      animation: spikeFlow 2.6s linear 1.7s infinite;
+    }
+    .kc-dot {
+      fill: var(--teal);
+      animation: kcFire 2.6s ease-in-out infinite;
+    }
+    .kc-dot-2 {
+      fill: var(--blue);
+      animation: kcFire 2.6s ease-in-out 0.9s infinite;
+    }
+    @keyframes spikeFlow {
+      from { stroke-dashoffset: 158; }
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes kcFire {
+      0%, 100% { opacity: 0.35; }
+      45%, 65% { opacity: 1; }
+    }
+  </style>
+
+  <rect class="frame" x="2" y="2" width="876" height="266" rx="12" />
+
+  <!-- Left Panel: Mushroom Body Circuit -->
+  <rect class="panel" x="16" y="16" width="490" height="238" rx="8" />
+  <text class="font h1" x="32" y="38">Janelia MaleCNS 果蝇蘑菇体真实连线回路</text>
+  <text class="mono muted" x="490" y="38" text-anchor="end">65 PN → 2,045 KC → 49 MBON</text>
+
+  <!-- Column Labels -->
+  <text class="font muted" x="68" y="64" text-anchor="middle">嗅觉小球 (PN)</text>
+  <text class="mono muted" x="68" y="77" text-anchor="middle" fill="var(--blue)">65 glomeruli</text>
+
+  <text class="font muted" x="245" y="64" text-anchor="middle">Kenyon 细胞 (稀疏展开)</text>
+  <text class="mono muted" x="245" y="77" text-anchor="middle" fill="var(--teal)">2,045 KCs (~5% active)</text>
+
+  <text class="font muted" x="425" y="64" text-anchor="middle">输出神经元 (MBON)</text>
+  <text class="mono muted" x="425" y="77" text-anchor="middle" fill="var(--amber)">49 readout + DAN</text>
+
+  <!-- Static Synapse Web -->
+  <g>
+    <path class="synapse" d="M 80 102 C 140 102, 165 92, 225 92" />
+    <path class="synapse" d="M 80 102 C 140 102, 165 132, 225 132" />
+    <path class="synapse" d="M 80 132 C 140 132, 165 112, 225 112" />
+    <path class="synapse" d="M 80 132 C 140 132, 165 172, 225 172" />
+    <path class="synapse" d="M 80 162 C 140 162, 165 152, 225 152" />
+    <path class="synapse" d="M 80 162 C 140 162, 165 192, 225 192" />
+    <path class="synapse" d="M 80 192 C 140 192, 165 132, 225 132" />
+    <path class="synapse" d="M 80 192 C 140 192, 165 212, 225 212" />
+
+    <path class="synapse" d="M 265 92 C 325 92, 355 118, 412 118" />
+    <path class="synapse" d="M 265 112 C 325 112, 355 148, 412 148" />
+    <path class="synapse" d="M 265 132 C 325 132, 355 118, 412 118" />
+    <path class="synapse" d="M 265 152 C 325 152, 355 178, 412 178" />
+    <path class="synapse" d="M 265 172 C 325 172, 355 148, 412 148" />
+    <path class="synapse" d="M 265 192 C 325 192, 355 178, 412 178" />
+    <path class="synapse" d="M 265 212 C 325 212, 355 148, 412 148" />
+  </g>
+
+  <!-- Animated Spikes -->
+  <path class="spike-1" d="M 80 102 C 140 102, 165 92, 225 92 L 265 92 C 325 92, 355 118, 412 118" />
+  <path class="spike-2" d="M 80 132 C 140 132, 165 172, 225 172 L 265 172 C 325 172, 355 148, 412 148" />
+  <path class="spike-3" d="M 80 192 C 140 192, 165 152, 225 152 L 265 152 C 325 152, 355 178, 412 178" />
+
+  <!-- PN Nodes -->
+  <g fill="var(--blue)">
+    <circle cx="68" cy="102" r="6" />
+    <circle cx="68" cy="132" r="6" />
+    <circle cx="68" cy="162" r="6" />
+    <circle cx="68" cy="192" r="6" />
+  </g>
+
+  <!-- KC Expansion Matrix -->
+  <rect x="220" y="82" width="50" height="142" rx="6" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1" />
+  <g>
+    <circle class="kc-dot" cx="235" cy="94" r="4" />
+    <circle cx="255" cy="94" r="3.5" fill="var(--slate)" opacity="0.3" />
+    <circle cx="235" cy="114" r="3.5" fill="var(--slate)" opacity="0.3" />
+    <circle class="kc-dot-2" cx="255" cy="114" r="4" />
+    <circle class="kc-dot" cx="235" cy="134" r="4" />
+    <circle cx="255" cy="134" r="3.5" fill="var(--slate)" opacity="0.3" />
+    <circle cx="235" cy="154" r="3.5" fill="var(--slate)" opacity="0.3" />
+    <circle class="kc-dot" cx="255" cy="154" r="4" />
+    <circle class="kc-dot-2" cx="235" cy="174" r="4" />
+    <circle cx="255" cy="174" r="3.5" fill="var(--slate)" opacity="0.3" />
+    <circle cx="235" cy="194" r="3.5" fill="var(--slate)" opacity="0.3" />
+    <circle class="kc-dot" cx="255" cy="194" r="4" />
+    <circle cx="245" cy="212" r="3.5" fill="var(--slate)" opacity="0.3" />
+  </g>
+
+  <!-- MBON Nodes -->
+  <g fill="var(--amber)">
+    <circle cx="425" cy="118" r="7" />
+    <circle cx="425" cy="148" r="7" />
+    <circle cx="425" cy="178" r="7" />
+  </g>
+
+  <text class="font muted" x="255" y="242" text-anchor="middle">五类任务：隔间遗忘 · 持续学习审计 · 气味觅食与果蝇群 · 元学习 · 旅行商 (TSP v1–v3)</text>
+
+  <!-- Right Panel: Preregistered Protocol & Honest Verdict -->
+  <rect class="panel" x="520" y="16" width="344" height="238" rx="8" />
+  <text class="font h1" x="538" y="38">预先登记检验与对照结论</text>
+  <text class="mono muted" x="848" y="38" text-anchor="end">PREREG + AUDIT</text>
+
+  <!-- Comparison Bars -->
+  <g transform="translate(538, 56)">
+    <text class="font txt" x="0" y="14">真实连接组 (MaleCNS)</text>
+    <rect x="135" y="4" width="118" height="12" rx="3" fill="var(--blue)" opacity="0.85" />
+    <text class="mono muted" x="260" y="14">≈ 打乱对照</text>
+
+    <text class="font txt" x="0" y="38">保度数打乱 (Shuffled)</text>
+    <rect x="135" y="28" width="119" height="12" rx="3" fill="var(--slate)" opacity="0.65" />
+    <text class="mono muted" x="260" y="38">拓扑无显著增益</text>
+
+    <text class="font txt" x="0" y="62">随机稀疏 / 线性学习器</text>
+    <rect x="135" y="52" width="136" height="12" rx="3" fill="var(--teal)" />
+    <text class="mono muted" x="276" y="62" fill="var(--teal)" font-weight="600">觅食更优</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="538" y1="134" x2="846" y2="134" stroke="var(--border)" stroke-width="1" />
+
+  <!-- Protocol Steps -->
+  <g transform="translate(538, 148)">
+    <rect x="0" y="0" width="308" height="42" rx="6" fill="var(--blue-soft)" />
+    <text class="font h2" x="12" y="17" fill="var(--blue)">核心发现：可检设定下真实连线未测出优势</text>
+    <text class="font muted" x="12" y="33">区分“没有证据”与“证明没有”；FlyModel 稀疏优势主要源于稠密对照缺陷</text>
+
+    <rect x="0" y="50" width="308" height="42" rx="6" fill="var(--amber-soft)" />
+    <text class="font h2" x="12" y="67" fill="var(--amber)">公开更正 (meta2)：修复参数起点后 9/9 选出遗忘</text>
+    <text class="font muted" x="12" y="83">每个实验配 PREREG_*.md · .sha256 哈希冻结 · 独立无上下文审查</text>
+  </g>
+</svg>

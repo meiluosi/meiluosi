@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 230" width="100%" height="230" role="img" aria-label="Agent指令消歧与LangGraph组合边界故障诊断示意">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-sub: #334155;
+      --text-muted: #64748b;
+      --green: #059669;
+      --green-bg: #ecfdf5;
+      --red: #dc2626;
+      --red-bg: #fef2f2;
+      --amber: #d97706;
+      --amber-bg: #fffbeb;
+      --blue: #2563eb;
+      --blue-bg: #eff6ff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --panel: #161b22;
+        --border: #30363d;
+        --text-main: #f0f6fc;
+        --text-sub: #c9d1d9;
+        --text-muted: #8b949e;
+        --green: #34d399;
+        --green-bg: #06281e;
+        --red: #f87171;
+        --red-bg: #2d1215;
+        --amber: #fbbf24;
+        --amber-bg: #292014;
+        --blue: #60a5fa;
+        --blue-bg: #172554;
+      }
+    }
+    .font { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; }
+    .frame { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; }
+    .panel { fill: var(--panel); stroke: var(--border); stroke-width: 1; }
+    .h1 { fill: var(--text-main); font-size: 13px; font-weight: 700; }
+    .txt { fill: var(--text-sub); font-size: 11px; }
+    .muted { fill: var(--text-muted); font-size: 10px; }
+    .fault-ring {
+      fill: none;
+      stroke: var(--red);
+      stroke-width: 2;
+      animation: faultPulse 2s ease-out infinite;
+    }
+    .scan-beam {
+      stroke: var(--blue);
+      stroke-width: 1.8;
+      stroke-dasharray: 6 6;
+      animation: beamFlow 3s linear infinite;
+    }
+    @keyframes faultPulse {
+      0% { opacity: 1; r: 13px; }
+      100% { opacity: 0; r: 24px; }
+    }
+    @keyframes beamFlow {
+      to { stroke-dashoffset: -36; }
+    }
+  </style>
+
+  <rect class="frame" x="2" y="2" width="876" height="226" rx="12" />
+
+  <!-- Left Half: Language Disambiguation & Fidelity -->
+  <rect class="panel" x="16" y="16" width="414" height="198" rx="8" />
+  <text class="font h1" x="32" y="38">1. 指令消歧与改写保真 (Before Agent Runs)</text>
+  <text class="mono muted" x="414" y="38" text-anchor="end">zh-disambiguate · rewrite-fidelity</text>
+
+  <g transform="translate(32, 54)">
+    <rect x="0" y="0" width="382" height="38" rx="6" fill="var(--amber-bg)" stroke="var(--amber)" stroke-width="1" />
+    <text class="mono muted" x="10" y="15" fill="var(--amber)" font-weight="600">原句（含歧义）</text>
+    <text class="font txt" x="10" y="31">“超时后重试并通知管理员，最多不超过 3 次”</text>
+
+    <line class="scan-beam" x1="191" y1="40" x2="191" y2="62" />
+
+    <rect x="0" y="64" width="184" height="58" rx="6" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1" />
+    <text class="mono muted" x="10" y="80" fill="var(--blue)" font-weight="600">zh-disambiguate</text>
+    <text class="font muted" x="10" y="96">· 澄清执行者、触发条件与边界</text>
+    <text class="font muted" x="10" y="112">· 缺失信息转为向作者提问</text>
+
+    <rect x="198" y="64" width="184" height="58" rx="6" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1" />
+    <text class="mono muted" x="208" y="80" fill="var(--green)" font-weight="600">rewrite-fidelity</text>
+    <text class="font muted" x="208" y="96">· 核对数字、字面量、比较方向</text>
+    <text class="font muted" x="208" y="112">· 核对 MUST/SHOULD 语气强度</text>
+
+    <text class="font muted" x="0" y="142">目标：让简体中文只剩一种读法，且改写不篡改原意。</text>
+  </g>
+
+  <!-- Right Half: Agent Composition Review (ACR) -->
+  <rect class="panel" x="446" y="16" width="418" height="198" rx="8" />
+  <text class="font h1" x="462" y="38">2. 构图与轨迹组合边界诊断 (When Graph Breaks)</text>
+  <text class="mono muted" x="848" y="38" text-anchor="end">agent-composition-review v0.6.0</text>
+
+  <!-- Graph visualization -->
+  <g transform="translate(462, 58)">
+    <!-- Node A -->
+    <rect x="0" y="18" width="90" height="44" rx="6" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1.2" />
+    <text class="mono txt" x="45" y="37" text-anchor="middle" fill="var(--green)" font-weight="600">Parent Node</text>
+    <text class="mono muted" x="45" y="52" text-anchor="middle">单测通过 ✓</text>
+
+    <!-- Edge 1 with Boundary Fault -->
+    <line x1="90" y1="40" x2="156" y2="40" stroke="var(--red)" stroke-width="2" />
+    <circle class="fault-ring" cx="123" cy="40" r="14" />
+    <circle cx="123" cy="40" r="11" fill="var(--red)" />
+    <text class="mono" x="123" y="44" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700">!</text>
+
+    <!-- Subgraph B -->
+    <rect x="156" y="18" width="96" height="44" rx="6" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1.2" />
+    <text class="mono txt" x="204" y="37" text-anchor="middle" fill="var(--green)" font-weight="600">Subgraph</text>
+    <text class="mono muted" x="204" y="52" text-anchor="middle">单测通过 ✓</text>
+
+    <!-- Edge 2 -->
+    <line class="scan-beam" x1="252" y1="40" x2="292" y2="40" />
+
+    <!-- ACR Report Box -->
+    <rect x="292" y="8" width="94" height="64" rx="6" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.2" />
+    <text class="mono txt" x="339" y="28" text-anchor="middle" fill="var(--blue)" font-weight="700">acr scan</text>
+    <text class="mono txt" x="339" y="44" text-anchor="middle" fill="var(--blue)" font-weight="700">+ trace</text>
+    <text class="mono muted" x="339" y="61" text-anchor="middle">零 API Key</text>
+
+    <!-- Diagnostic Output -->
+    <rect x="0" y="84" width="386" height="58" rx="6" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1" />
+    <text class="mono muted" x="12" y="101" fill="var(--red)" font-weight="600">⚡ 组合边界故障：子图覆盖父图状态 / 并行写同一键 / 未声明字段 / 重复副作用</text>
+    <text class="mono muted" x="12" y="118">→ 落到具体代码行号 (graph.py:L142) 与失败轨迹事件 ID + 最小修复建议</text>
+    <text class="font muted" x="12" y="134">状态：v0.6.0 维护模式 · 优先处理真实误报与兼容性，不宣称生产准确率</text>
+  </g>
+</svg>

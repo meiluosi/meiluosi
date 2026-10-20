@@ -14,4 +14,3 @@
     "test": "node --test build_readme.test.mjs"
   }
 }
-
