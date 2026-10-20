@@ -4,7 +4,7 @@
 
 我关心模型怎样学习、指令怎样被准确理解，以及一个想法怎样变成可以动手验证的东西。
 
-[个人网站](https://meiluosi.github.io/) · [研究笔记](https://meiluosi.github.io/notes/) · [实验室](https://meiluosi.github.io/lab/) · [模型工作台](https://meiluosi.github.io/lab/model-pipeline/)
+[个人网站](https://meiluosi.github.io/) · [研究笔记](https://meiluosi.github.io/notes/) · [实验室](https://meiluosi.github.io/lab/) · [模型工作台](https://meiluosi.github.io/lab/model-pipeline/) · [Hugging Face](https://huggingface.co/fengyu116) · [知乎](https://www.zhihu.com/people/feng-chui-guo-de-jie-dao-39)
 
 <p align="center">
   <img src="./assets/hero-banner.svg" alt="枫语的研究与工程版图：可检验实验、机械仿真、Agent组合诊断与FDE证据交付" width="880" />
@@ -62,11 +62,19 @@
 
 ### 从零跑通小模型训练流程
 
-在个人电脑上连接数据、分词、随机初始化预训练、SFT、DPO、评测与本地推理，并留下保存恢复和运行记录；配套连载预训练语料选型、清洗、质量评分、去重污染与中英配比笔记。
+在个人电脑上连接数据、分词、随机初始化预训练、SFT、DPO、评测与本地推理，并留下保存恢复和运行记录；系统连载从语料选型地图、网页清洗、质量评分、去重抗污染、中英配比到可追溯语料打包的全套数据工程实践。
 
-**状态：已完成 138,560 参数 tiny 模型的工程验证；尚不代表实用语言能力，30M 及以上仍待训练。**
+<p align="center">
+  <a href="https://meiluosi.github.io/lab/model-pipeline/">
+    <img src="./assets/llm-training-pipeline.svg" alt="小模型预训练数据工程与全链路训练流水线：语料选型、清洗、质量评分、去重抗污染、中英配比到预训练、SFT与DPO对齐" width="880" />
+  </a>
+  <br />
+  <sub>小模型全链路预训练数据工程与对齐流水线 · 点击查看模型工作台与实验记录</sub>
+</p>
 
-[看实现与实验记录](https://github.com/meiluosi/meiluosi.github.io/tree/master/projects/small-model-lab) · [打开模型工作台](https://meiluosi.github.io/lab/model-pipeline/)
+**状态：已完成 138,560 参数 tiny 模型的工程验证与流水线打通；30M 消融实验与 1B MacBook Air M4 本地实战推进中。**
+
+[看实现与实验记录](https://github.com/meiluosi/meiluosi.github.io/tree/master/projects/small-model-lab) · [打开模型工作台](https://meiluosi.github.io/lab/model-pipeline/) · [Hugging Face 权重与数据](https://huggingface.co/fengyu116) · [知乎专栏讨论](https://www.zhihu.com/people/feng-chui-guo-de-jie-dao-39)
 
 ## FDE 实战与证据驱动交付系列
 

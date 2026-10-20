@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 270" width="100%" height="270" role="img" aria-label="小模型预训练数据工程与全链路训练流水线：语料选型、清洗、质量评分、去重抗污染、中英配比到预训练、SFT与DPO对齐">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-sub: #334155;
+      --text-muted: #64748b;
+      --cyan: #0284c7;
+      --cyan-soft: #e0f2fe;
+      --emerald: #059669;
+      --emerald-soft: #ecfdf5;
+      --purple: #7c3aed;
+      --purple-soft: #f3e8ff;
+      --amber: #d97706;
+      --amber-soft: #fef3c7;
+      --track: #cbd5e1;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --card: #161b22;
+        --border: #30363d;
+        --text-main: #f0f6fc;
+        --text-sub: #c9d1d9;
+        --text-muted: #8b949e;
+        --cyan: #38bdf8;
+        --cyan-soft: #082f49;
+        --emerald: #34d399;
+        --emerald-soft: #06281e;
+        --purple: #a78bfa;
+        --purple-soft: #2e1065;
+        --amber: #fbbf24;
+        --amber-soft: #292014;
+        --track: #30363d;
+      }
+    }
+    .font { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; }
+    .frame { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; }
+    .card { fill: var(--card); stroke: var(--border); stroke-width: 1; }
+    .h1 { fill: var(--text-main); font-size: 13px; font-weight: 700; }
+    .txt { fill: var(--text-sub); font-size: 11px; }
+    .muted { fill: var(--text-muted); font-size: 10px; }
+    .step-tag { font-size: 9.5px; font-weight: 700; }
+    
+    .data-flow {
+      stroke: var(--cyan);
+      stroke-width: 2;
+      stroke-dasharray: 8 6;
+      animation: flowRight 3s linear infinite;
+    }
+    .loss-curve {
+      fill: none;
+      stroke: var(--emerald);
+      stroke-width: 2.2;
+      stroke-dasharray: 240;
+      animation: drawLoss 4s ease-in-out infinite alternate;
+    }
+    .pulse-dot {
+      fill: var(--purple);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes flowRight {
+      to { stroke-dashoffset: -28; }
+    }
+    @keyframes drawLoss {
+      0% { stroke-dashoffset: 140; opacity: 0.6; }
+      100% { stroke-dashoffset: 0; opacity: 1; }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(0.9); opacity: 0.4; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+  </style>
+
+  <rect class="frame" x="2" y="2" width="876" height="266" rx="12" />
+
+  <!-- Title & Status -->
+  <text class="font h1" x="20" y="27">小模型训练全链路：从预训练语料到对齐评测</text>
+  <text class="mono muted" x="860" y="27" text-anchor="end">DATA RECIPE → PRETRAIN → SFT → DPO → EVAL</text>
+
+  <!-- Section 1: Pretraining Data Engineering (The 6-step Recipe) -->
+  <rect class="card" x="16" y="42" width="536" height="212" rx="8" />
+  <rect x="16" y="42" width="536" height="3" rx="1.5" fill="var(--cyan)" />
+  <text class="mono step-tag" x="30" y="62" fill="var(--cyan)">PART 1 · 预训练语料工程（6 步可追溯配方）</text>
+  <text class="font muted" x="536" y="62" text-anchor="end">博客《预训练数据》连载实践</text>
+
+  <!-- Step Grid (2 rows x 3 cols) -->
+  <!-- 01 Map -->
+  <g transform="translate(30, 74)">
+    <rect x="0" y="0" width="158" height="52" rx="6" fill="var(--cyan-soft)" />
+    <text class="mono step-tag" x="10" y="18" fill="var(--cyan)">01 · 语料选型地图</text>
+    <text class="font txt" x="10" y="34">中英开放语料梳理</text>
+    <text class="font muted" x="10" y="47">Common Crawl / 维基 / 代码</text>
+  </g>
+
+  <!-- 02 Cleaning -->
+  <g transform="translate(204, 74)">
+    <rect x="0" y="0" width="158" height="52" rx="6" fill="var(--cyan-soft)" />
+    <text class="mono step-tag" x="10" y="18" fill="var(--cyan)">02 · 规则与网页清洗</text>
+    <text class="font txt" x="10" y="34">提取正文·去除模板噪声</text>
+    <text class="font muted" x="10" y="47">保留自然段落与代码块</text>
+  </g>
+
+  <!-- 03 Quality -->
+  <g transform="translate(378, 74)">
+    <rect x="0" y="0" width="158" height="52" rx="6" fill="var(--cyan-soft)" />
+    <text class="mono step-tag" x="10" y="18" fill="var(--cyan)">03 · 启发式与模型评分</text>
+    <text class="font txt" x="10" y="34">困惑度过滤 + 分类器打分</text>
+    <text class="font muted" x="10" y="47">多阈值阶梯筛选高质量文本</text>
+  </g>
+
+  <!-- 04 Dedup & Contamination -->
+  <g transform="translate(30, 136)">
+    <rect x="0" y="0" width="158" height="52" rx="6" fill="var(--purple-soft)" />
+    <text class="mono step-tag" x="10" y="18" fill="var(--purple)">04 · 去重与防评测污染</text>
+    <text class="font txt" x="10" y="34">MinHash LSH 模糊去重</text>
+    <text class="font muted" x="10" y="47">基准数据集 n-gram 过滤审查</text>
+  </g>
+
+  <!-- 05 Mixture -->
+  <g transform="translate(204, 136)">
+    <rect x="0" y="0" width="158" height="52" rx="6" fill="var(--purple-soft)" />
+    <text class="mono step-tag" x="10" y="18" fill="var(--purple)">05 · 中英文分布混合</text>
+    <text class="font txt" x="10" y="34">语料比例到训练采样</text>
+    <text class="font muted" x="10" y="47">防止单语言过拟合与退化</text>
+  </g>
+
+  <!-- 06 Build -->
+  <g transform="translate(378, 136)">
+    <rect x="0" y="0" width="158" height="52" rx="6" fill="var(--purple-soft)" />
+    <text class="mono step-tag" x="10" y="18" fill="var(--purple)">06 · 可追溯语料打包</text>
+    <text class="font txt" x="10" y="34">分词器训练与索引构建</text>
+    <text class="font muted" x="10" y="47">哈希版本化·每个 token 可追溯</text>
+  </g>
+
+  <!-- Bottom Arrow to Part 2 -->
+  <g transform="translate(30, 202)">
+    <text class="mono muted" x="0" y="15">语料产出 → Token 流化输入</text>
+    <line class="data-flow" x1="160" y1="11" x2="510" y2="11" />
+  </g>
+
+  <!-- Section 2: Model Training & Diagnostics (Right Panel) -->
+  <rect class="card" x="568" y="42" width="296" height="212" rx="8" />
+  <rect x="568" y="42" width="296" height="3" rx="1.5" fill="var(--emerald)" />
+  <text class="mono step-tag" x="584" y="62" fill="var(--emerald)">PART 2 · 训练动力学与对齐评测</text>
+
+  <!-- Mini Loss Chart with Animation -->
+  <g transform="translate(584, 76)">
+    <!-- Axes -->
+    <line x1="0" y1="62" x2="160" y2="62" stroke="var(--border)" stroke-width="1.2" />
+    <line x1="0" y1="0" x2="0" y2="62" stroke="var(--border)" stroke-width="1.2" />
+    <!-- Dynamic Loss curve -->
+    <path class="loss-curve" d="M 4 8 C 24 45, 60 52, 156 56" />
+    <!-- Pulse dot on current step -->
+    <circle class="pulse-dot" cx="156" cy="56" r="3.5" style="transform-origin: 156px 56px;" />
+    <text class="mono muted" x="5" y="12">Loss</text>
+    <text class="mono muted" x="160" y="74" text-anchor="end">Steps / Tokens</text>
+  </g>
+
+  <!-- Status / Target Box -->
+  <g transform="translate(584, 158)">
+    <rect x="0" y="0" width="264" height="82" rx="6" fill="var(--emerald-soft)" />
+    <text class="mono step-tag" x="10" y="17" fill="var(--emerald)">· 138,560 Tiny Model</text>
+    <text class="font muted" x="135" y="17">工程与流水线跑通 ✓</text>
+
+    <text class="mono step-tag" x="10" y="37" fill="var(--emerald)">· 30M / 1B M4 实战</text>
+    <text class="font muted" x="135" y="37">数据配比消融与评估</text>
+
+    <text class="font muted" x="10" y="58">· SFT 指令微调 → DPO 偏好对齐 → 本地推理部署</text>
+    <text class="mono muted" x="10" y="73" fill="var(--text-sub)">全链路支持 Mac 本地冷启动与权重追溯</text>
+  </g>
+</svg>
