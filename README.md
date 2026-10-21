@@ -4,7 +4,7 @@
 
 我关心模型怎样学习、指令怎样被准确理解，以及一个想法怎样变成可以动手验证的东西。
 
-[个人网站](https://meiluosi.github.io/) · [研究笔记](https://meiluosi.github.io/notes/) · [实验室](https://meiluosi.github.io/lab/) · [模型工作台](https://meiluosi.github.io/lab/model-pipeline/) · [Hugging Face](https://huggingface.co/fengyu116) · [知乎](https://www.zhihu.com/people/feng-chui-guo-de-jie-dao-39)
+[个人网站](https://meiluosi.github.io/) · [研究笔记](https://meiluosi.github.io/notes/) · [实验室](https://meiluosi.github.io/lab/) · [模型工作台](https://meiluosi.github.io/lab/model-pipeline/) · [Hugging Face](https://huggingface.co/fengyu116) · [知乎](https://www.zhihu.com/people/feng-chui-guo-de-jie-dao-39) · [邮件联系](mailto:1160337988@qq.com) · [English](README.en.md)
 
 <p align="center">
   <img src="./assets/hero-banner.svg" alt="枫语的研究与工程版图：可检验实验、机械仿真、Agent组合诊断与FDE证据交付" width="880" />
@@ -124,11 +124,11 @@
 <!-- posts starts -->
 ### 最新文章
 
-- [奖励模型怎样从比较中学习：分数差、概率与失效边界](https://meiluosi.github.io/posts/2026-10-20-llm-training-preference-03-reward-model/) · 2026-10-20
-- [偏好对怎样构建：共同上下文、候选差异与标注偏差](https://meiluosi.github.io/posts/2026-10-20-llm-training-preference-02-pairs/) · 2026-10-20
-- [标准答案不唯一时，怎样提供训练信号：示范、偏好与评分](https://meiluosi.github.io/posts/2026-10-20-llm-training-preference-01-feedback/) · 2026-10-20
-- [怎样判断 SFT 改善了什么：格式、准确率与能力退化](https://meiluosi.github.io/posts/2026-10-20-llm-training-sft-06-evaluation/) · 2026-10-20
-- [全参数微调与 LoRA 怎样选择：更新空间、显存与量化](https://meiluosi.github.io/posts/2026-10-20-llm-training-sft-05-adaptation/) · 2026-10-20
+- [真实连线没测出优势：一个“负结果”项目到底留下了什么](https://meiluosi.github.io/posts/2026-10-21-fly-connectome-11-summary/) · 2026-10-21
+- [审查抓到了什么：一份“怎么骗自己”的清单](https://meiluosi.github.io/posts/2026-10-21-fly-connectome-10-review-checklist/) · 2026-10-21
+- [隔间与多巴胺：把效价专门化放进模型之后，得到了什么](https://meiluosi.github.io/posts/2026-10-21-fly-connectome-09-compartments-and-dopamine/) · 2026-10-21
+- [三只果蝇的真实连线：共享的结构，大半是嗅小球层面的输入总量](https://meiluosi.github.io/posts/2026-10-21-fly-connectome-08-individual-differences/) · 2026-10-21
+- [阳性对照与自然气味：能检出连线的作用，却没有测出它在自然气味上的优势](https://meiluosi.github.io/posts/2026-10-21-fly-connectome-07-positive-controls-natural-odours/) · 2026-10-21
 <!-- posts ends -->
 
 <!-- releases starts -->
@@ -145,6 +145,12 @@
 - [md-knowledge-graph：工程完成之后，为什么仍决定停止扩展？](https://github.com/meiluosi/md-knowledge-graph/blob/main/docs/retrospective.md) — 检查 Markdown 引用完整性与标签一致性；客观部分与 `lychee` 重叠，独有部分是工具发明的意见。项目已冻结、进入维护模式，保留代码、实际使用记录和复盘。
 - [fly-connectome-study：当五条检验线都没有测出真实连线优势，我们能说什么、不能说什么？](https://github.com/meiluosi/fly-connectome-study/blob/main/FINAL_SUMMARY.md) — 保留全部阴性结果、对照缺陷分析与元学习参数化更正记录。
 
+## 联系
+
+- **邮箱** — [1160337988@qq.com](mailto:1160337988@qq.com)
+- **站内** — [meiluosi.github.io/contact](https://meiluosi.github.io/contact/)
+- **可以一起聊聊** — 论文讨论与实验复现 · 因果推理与效果评估 · Agent、科研系统与 RSI
+
 ---
 
-<sub>代表作品与状态人工维护；最新文章、最近发布由 [构建脚本](./build_readme.mjs) 自动更新。数据源不可用时保留上次内容。</sub>
+<sub>代表作品与状态人工维护；最新文章、最近发布由 [构建脚本](./build_readme.mjs) 自动更新，数据源不可用时保留上次内容。英文门面见 [README.en.md](./README.en.md)。</sub>

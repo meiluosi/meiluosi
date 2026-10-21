@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 220" width="100%" height="220" role="img" aria-label="Feng Yu's research and engineering map: preregistered experiments, mechanical simulation, agent composition diagnostics, and evidence-driven FDE delivery">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --text-muted: #64748b;
+      --accent-blue: #2563eb;
+      --accent-teal: #0d9488;
+      --accent-amber: #d97706;
+      --accent-indigo: #4f46e5;
+      --grid: #f1f5f9;
+      --pill-bg: #f1f5f9;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --card: #161b22;
+        --border: #30363d;
+        --border-strong: #484f58;
+        --text-main: #f0f6fc;
+        --text-sub: #c9d1d9;
+        --text-muted: #8b949e;
+        --accent-blue: #58a6ff;
+        --accent-teal: #2dd4bf;
+        --accent-amber: #f59e0b;
+        --accent-indigo: #818cf8;
+        --grid: #161b22;
+        --pill-bg: #21262d;
+      }
+    }
+    .font {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    .bg-rect { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; }
+    .card { fill: var(--card); stroke: var(--border); stroke-width: 1; transition: stroke 0.3s; }
+    .title { fill: var(--text-main); font-size: 13px; font-weight: 700; }
+    .desc { fill: var(--text-sub); font-size: 11px; }
+    .meta { fill: var(--text-muted); font-size: 10px; }
+    .pill { fill: var(--pill-bg); stroke: var(--border); stroke-width: 1; }
+    .flow-line {
+      stroke: var(--border-strong);
+      stroke-width: 1.5;
+      stroke-dasharray: 4 4;
+      animation: dashMove 12s linear infinite;
+    }
+    .pulse-blue { fill: var(--accent-blue); animation: pulse 2.8s ease-in-out infinite; }
+    .pulse-teal { fill: var(--accent-teal); animation: pulse 2.8s ease-in-out 0.7s infinite; }
+    .pulse-amber { fill: var(--accent-amber); animation: pulse 2.8s ease-in-out 1.4s infinite; }
+    .pulse-indigo { fill: var(--accent-indigo); animation: pulse 2.8s ease-in-out 2.1s infinite; }
+    .wave-path {
+      fill: none;
+      stroke: var(--accent-teal);
+      stroke-width: 1.8;
+      stroke-dasharray: 120;
+      animation: waveScan 4s ease-in-out infinite alternate;
+    }
+    @keyframes dashMove {
+      to { stroke-dashoffset: -96; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.35; transform: scale(0.92); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+    @keyframes waveScan {
+      0% { stroke-dashoffset: 60; opacity: 0.55; }
+      100% { stroke-dashoffset: 0; opacity: 1; }
+    }
+  </style>
+
+  <!-- Outer Frame -->
+  <rect class="bg-rect" x="2" y="2" width="876" height="216" rx="12" />
+
+  <!-- Subtle Header Bar -->
+  <rect class="pill" x="18" y="14" width="844" height="28" rx="6" />
+  <circle cx="34" cy="28" r="4" fill="var(--accent-blue)" />
+  <text class="font meta" x="46" y="32" font-weight="600" fill="var(--text-sub)">Research &amp; engineering thread · HYPOTHESIS → PREREGISTER → BUILD → AUDIT → RETROSPECTIVE</text>
+  <text class="mono meta" x="848" y="32" text-anchor="end">meiluosi.github.io</text>
+
+  <!-- Connecting Backbone -->
+  <line class="flow-line" x1="115" y1="125" x2="765" y2="125" />
+
+  <!-- Track 1: Connectome &amp; Small Model -->
+  <g transform="translate(18, 54)">
+    <rect class="card" x="0" y="0" width="200" height="146" rx="8" />
+    <rect x="0" y="0" width="200" height="4" rx="2" fill="var(--accent-blue)" />
+    <circle class="pulse-blue" cx="182" cy="20" r="4.5" style="transform-origin: 182px 20px;" />
+    <text class="mono meta" x="14" y="23" fill="var(--accent-blue)" font-weight="600">01 · SCIENCE &amp; LLM LAB</text>
+    <text class="font title" x="14" y="44">Connectome &amp; LLM</text>
+    <text class="font desc" x="14" y="65">· Preregistered fly-wiring arms</text>
+    <text class="font desc" x="14" y="83">· Corpus clean/dedup/mix</text>
+    <text class="font desc" x="14" y="101">· Pretrain → SFT → DPO</text>
+    <!-- Mini neural motif -->
+    <g transform="translate(14, 114)">
+      <line x1="8" y1="12" x2="52" y2="5" stroke="var(--accent-blue)" stroke-width="1" opacity="0.5"/>
+      <line x1="8" y1="12" x2="52" y2="19" stroke="var(--accent-blue)" stroke-width="1" opacity="0.5"/>
+      <line x1="52" y1="5" x2="96" y2="12" stroke="var(--accent-blue)" stroke-width="1" opacity="0.5"/>
+      <line x1="52" y1="19" x2="96" y2="12" stroke="var(--accent-blue)" stroke-width="1" opacity="0.5"/>
+      <circle cx="8" cy="12" r="3" fill="var(--accent-blue)"/>
+      <circle cx="52" cy="5" r="2.5" fill="var(--accent-blue)"/>
+      <circle cx="52" cy="19" r="2.5" fill="var(--accent-blue)"/>
+      <circle cx="96" cy="12" r="3" fill="var(--accent-blue)"/>
+      <text class="mono meta" x="172" y="16" text-anchor="end">PREREG + SHA256</text>
+    </g>
+  </g>
+
+  <!-- Track 2: Kinematics &amp; Evolution -->
+  <g transform="translate(232, 54)">
+    <rect class="card" x="0" y="0" width="200" height="146" rx="8" />
+    <rect x="0" y="0" width="200" height="4" rx="2" fill="var(--accent-teal)" />
+    <circle class="pulse-teal" cx="182" cy="20" r="4.5" style="transform-origin: 182px 20px;" />
+    <text class="mono meta" x="14" y="23" fill="var(--accent-teal)" font-weight="600">02 · SIMULATION &amp; DESIGN</text>
+    <text class="font title" x="14" y="44">Strandbeest Kinematics</text>
+    <text class="font desc" x="14" y="65">· Jansen linkage &amp; gait</text>
+    <text class="font desc" x="14" y="83">· Evolve ratios and phase</text>
+    <text class="font desc" x="14" y="101">· Editor + 3D print export</text>
+    <!-- Mini trajectory wave -->
+    <g transform="translate(14, 114)">
+      <path class="wave-path" d="M 4 16 C 24 2, 44 2, 64 16 C 84 22, 96 16, 104 16" />
+      <text class="mono meta" x="172" y="16" text-anchor="end">Kinematics</text>
+    </g>
+  </g>
+
+  <!-- Track 3: Agent Composition &amp; Language -->
+  <g transform="translate(446, 54)">
+    <rect class="card" x="0" y="0" width="200" height="146" rx="8" />
+    <rect x="0" y="0" width="200" height="4" rx="2" fill="var(--accent-amber)" />
+    <circle class="pulse-amber" cx="182" cy="20" r="4.5" style="transform-origin: 182px 20px;" />
+    <text class="mono meta" x="14" y="23" fill="var(--accent-amber)" font-weight="600">03 · AGENT &amp; LANGUAGE</text>
+    <text class="font title" x="14" y="44">Agent Boundary Audit</text>
+    <text class="font desc" x="14" y="65">· ACR: state-clobber faults</text>
+    <text class="font desc" x="14" y="83">· One reading per instruction</text>
+    <text class="font desc" x="14" y="101">· Rewrite fidelity checks</text>
+    <g transform="translate(14, 114)">
+      <rect x="0" y="3" width="28" height="16" rx="3" fill="none" stroke="var(--accent-amber)" stroke-width="1.2"/>
+      <text class="mono meta" x="14" y="14" text-anchor="middle" fill="var(--accent-amber)">acr</text>
+      <line x1="32" y1="11" x2="64" y2="11" stroke="var(--accent-amber)" stroke-width="1.2" stroke-dasharray="2 2"/>
+      <circle cx="48" cy="11" r="3" fill="var(--accent-amber)"/>
+      <text class="mono meta" x="172" y="16" text-anchor="end">line · trace ID</text>
+    </g>
+  </g>
+
+  <!-- Track 4: FDE Evidence-Driven Suite -->
+  <g transform="translate(660, 54)">
+    <rect class="card" x="0" y="0" width="202" height="146" rx="8" />
+    <rect x="0" y="0" width="202" height="4" rx="2" fill="var(--accent-indigo)" />
+    <circle class="pulse-indigo" cx="184" cy="20" r="4.5" style="transform-origin: 184px 20px;" />
+    <text class="mono meta" x="14" y="23" fill="var(--accent-indigo)" font-weight="600">04 · FDE FIELD SUITE</text>
+    <text class="font title" x="14" y="44">FDE Delivery Suite</text>
+    <text class="font desc" x="14" y="65">· Ramp → frame the problem</text>
+    <text class="font desc" x="14" y="83">· Route &amp; model bakeoff</text>
+    <text class="font desc" x="14" y="101">· Demo → preregistered pilot</text>
+    <g transform="translate(14, 114)">
+      <circle cx="8" cy="12" r="3" fill="var(--accent-indigo)" />
+      <circle cx="24" cy="12" r="3" fill="var(--accent-indigo)" opacity="0.8" />
+      <circle cx="40" cy="12" r="3" fill="var(--accent-indigo)" opacity="0.6" />
+      <circle cx="56" cy="12" r="3" fill="var(--accent-indigo)" opacity="0.4" />
+      <text class="mono meta" x="174" y="16" text-anchor="end">7 Independent Skills</text>
+    </g>
+  </g>
+</svg>

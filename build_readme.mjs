@@ -2,6 +2,9 @@
 /**
  * 只更新 README 中的文章与发布区块。代表作品与项目状态人工维护。
  * 零依赖；抓取失败保留上次内容，成功确认无数据才清空对应区块。
+ *
+ * 中文门面刷新文章与发布两个区块；英文门面只刷新发布区块
+ * （发布是语言中立的，文章标题仍是中文，需要时再补英文订阅源）。
  */
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -32,6 +35,18 @@ const RELEASE_REPOS = [
 	"content-card-designer",
 ];
 const README_PATH = new URL("./README.md", import.meta.url);
+const README_EN_PATH = new URL("./README.en.md", import.meta.url);
+
+// 每个门面文件刷新区块的方式。中文门面带文章与发布，英文门面只带发布。
+const TARGETS = [
+	{ path: README_PATH, label: "README.md", lang: "zh", sections: ["posts", "releases"] },
+	{ path: README_EN_PATH, label: "README.en.md", lang: "en", sections: ["releases"] },
+];
+
+const HEADINGS = {
+	zh: { posts: "### 最新文章", releases: "### 最近发布" },
+	en: { posts: "### Latest posts", releases: "### Recent releases" },
+};
 
 function clean(value) {
 	const named = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " };
@@ -125,23 +140,36 @@ async function fetchReleases(fetchImpl, token) {
 	return groups.flat().sort((a, b) => b.date.localeCompare(a.date) || a.name.localeCompare(b.name)).slice(0, LIMIT);
 }
 
-export async function updateReadme(readme, { fetchImpl = fetch, token = process.env.GITHUB_TOKEN || "", warn = console.warn } = {}) {
-	const sections = [
-		{
+export async function updateReadme(readme, {
+	fetchImpl = fetch,
+	token = process.env.GITHUB_TOKEN || "",
+	warn = console.warn,
+	lang = "zh",
+	sections: wanted = ["posts", "releases"],
+} = {}) {
+	const headings = HEADINGS[lang] || HEADINGS.zh;
+	const available = {
+		posts: {
 			name: "posts",
 			fetch: () => fetchPosts(fetchImpl, token),
-			render: (items) => items.length ? "### 最新文章\n\n" + items.map((p) =>
+			render: (items) => items.length ? headings.posts + "\n\n" + items.map((p) =>
 				"- [" + label(p.title) + "](" + p.link + ")" + (p.date ? " · " + p.date : "")
 			).join("\n") : "",
 		},
-		{
+		releases: {
 			name: "releases",
 			fetch: () => fetchReleases(fetchImpl, token),
-			render: (items) => items.length ? "### 最近发布\n\n" + items.map((r) =>
+			render: (items) => items.length ? headings.releases + "\n\n" + items.map((r) =>
 				"- [" + label(r.name) + "](" + r.link + ") · " + r.date + (r.pre ? " \u0060pre\u0060" : "")
 			).join("\n") : "",
 		},
-	];
+	};
+	const sections = wanted.map((name) => {
+		const section = available[name];
+		if (!section) throw new Error("未知区块：" + name);
+		return section;
+	});
+	// 标记必须在发起请求前校验：缺标记直接失败，不浪费一次抓取。
 	for (const section of sections) replaceRegion(readme, section.name, "");
 	const results = await Promise.allSettled(sections.map((section) => section.fetch()));
 	for (const [index, result] of results.entries()) {
@@ -156,14 +184,28 @@ export async function updateReadme(readme, { fetchImpl = fetch, token = process.
 }
 
 async function main() {
-	const before = await readFile(README_PATH, "utf8");
-	const after = await updateReadme(before);
-	if (after === before) {
-		console.log("README 无变化。");
-		return;
+	let changed = false;
+	for (const target of TARGETS) {
+		let before;
+		try {
+			before = await readFile(target.path, "utf8");
+		} catch (error) {
+			if (error && error.code === "ENOENT") {
+				console.warn("跳过不存在的文件：" + target.label);
+				continue;
+			}
+			throw error;
+		}
+		const after = await updateReadme(before, { lang: target.lang, sections: target.sections });
+		if (after === before) {
+			console.log(target.label + " 无变化。");
+			continue;
+		}
+		await writeFile(target.path, after, "utf8");
+		changed = true;
+		console.log("已更新 " + target.label + " 的动态区块。");
 	}
-	await writeFile(README_PATH, after, "utf8");
-	console.log("已更新 README 的动态区块。");
+	if (!changed) console.log("门面无变化。");
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

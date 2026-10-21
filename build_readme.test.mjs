@@ -91,3 +91,36 @@ test("missing template markers fail before requests and unsafe feed links preser
 	});
 	assert.ok(output.includes("Old posts"));
 });
+
+const englishTemplate = "# Selected work\n\n<!-- releases starts -->\nOld releases\n<!-- releases ends -->\n";
+
+test("the English face refreshes only the releases region and uses English headings", async () => {
+	const urls = [];
+	const fetchImpl = async (url) => {
+		urls.push(url);
+		assert.ok(url.includes("/releases"), "English face must not fetch the Chinese feed");
+		return response([release("agent-composition-review")], true);
+	};
+	const output = await updateReadme(englishTemplate, {
+		fetchImpl,
+		token: "test-token",
+		lang: "en",
+		sections: ["releases"],
+	});
+	assert.ok(output.includes("### Recent releases"));
+	assert.ok(!output.includes("最新发布"));
+	assert.ok(output.includes("agent-composition-review v1"));
+	assert.ok(!urls.some((url) => url.endsWith("rss.xml")));
+	assert.equal(await updateReadme(output, { fetchImpl, token: "test-token", lang: "en", sections: ["releases"] }), output);
+});
+
+test("a section without a marker fails before any request", async () => {
+	await assert.rejects(updateReadme(englishTemplate, {
+		fetchImpl: async () => assert.fail("must not fetch"),
+		sections: ["posts"],
+	}), /缺少区块标记/);
+	await assert.rejects(updateReadme(englishTemplate, {
+		fetchImpl: async () => assert.fail("must not fetch"),
+		sections: ["unknown"],
+	}), /未知区块/);
+});
