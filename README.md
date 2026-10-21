@@ -124,11 +124,11 @@
 <!-- posts starts -->
 ### 最新文章
 
-- [构建一份可追溯的小型预训练语料](https://meiluosi.github.io/posts/2026-10-15-llm-training-data-06-build/) · 2026-10-15
-- [中英文数据怎样混合：从语料比例到实际训练分布](https://meiluosi.github.io/posts/2026-10-15-llm-training-data-05-mixture/) · 2026-10-15
-- [去重与评测污染：模型究竟学到了什么](https://meiluosi.github.io/posts/2026-10-15-llm-training-data-04-dedup/) · 2026-10-15
-- [什么是高质量预训练数据：从规则到模型评分](https://meiluosi.github.io/posts/2026-10-15-llm-training-data-03-quality/) · 2026-10-15
-- [从网页到训练文本：预训练数据清洗到底在做什么](https://meiluosi.github.io/posts/2026-10-15-llm-training-data-02-cleaning/) · 2026-10-15
+- [奖励模型怎样从比较中学习：分数差、概率与失效边界](https://meiluosi.github.io/posts/2026-10-20-llm-training-preference-03-reward-model/) · 2026-10-20
+- [偏好对怎样构建：共同上下文、候选差异与标注偏差](https://meiluosi.github.io/posts/2026-10-20-llm-training-preference-02-pairs/) · 2026-10-20
+- [标准答案不唯一时，怎样提供训练信号：示范、偏好与评分](https://meiluosi.github.io/posts/2026-10-20-llm-training-preference-01-feedback/) · 2026-10-20
+- [怎样判断 SFT 改善了什么：格式、准确率与能力退化](https://meiluosi.github.io/posts/2026-10-20-llm-training-sft-06-evaluation/) · 2026-10-20
+- [全参数微调与 LoRA 怎样选择：更新空间、显存与量化](https://meiluosi.github.io/posts/2026-10-20-llm-training-sft-05-adaptation/) · 2026-10-20
 <!-- posts ends -->
 
 <!-- releases starts -->
