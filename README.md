@@ -1,8 +1,8 @@
 # 枫语 / Feng Yu
 
-**研究 AI，也做工具和仿真。把过程、结果和局限一起写下来。**
+**核心主线：探索“智能是什么？”——在物理具身、生物回路、统计学习与符号推理的交界处做可检验的实证。**
 
-我关心模型怎样学习、指令怎样被准确理解，以及一个想法怎样变成可以动手验证的东西。
+智能并没有单一、排他的终极定义。它既不是单纯的规模化（Scaling）拟合，也不是单纯的神经布线或抽象规则。跨越控制论、连接主义、形态计算、动力系统与认知哲学，我关心的是：**不同形式的智能究竟如何涌现？它们的计算与物理边界在哪里？以及怎样用不自欺的严谨实验去测量它们。**
 
 [个人网站](https://meiluosi.github.io/) · [研究笔记](https://meiluosi.github.io/notes/) · [实验室](https://meiluosi.github.io/lab/) · [模型工作台](https://meiluosi.github.io/lab/model-pipeline/) · [Hugging Face](https://huggingface.co/fengyu116) · [知乎](https://www.zhihu.com/people/feng-chui-guo-de-jie-dao-39) · [邮件联系](mailto:1160337988@qq.com) · [English](README.en.md)
 
@@ -10,11 +10,55 @@
   <img src="./assets/hero-banner.svg" alt="枫语的研究与工程版图：可检验实验、机械仿真、Agent组合诊断与FDE证据交付" width="880" />
 </p>
 
-## 最近在做
+## 探索地图与实证坐标
 
-### 真实果蝇连接组能否当作学习与优化的归纳偏置？
+关于智能的研究，并不只是争论“哪一种算法更强”，而是在追问：究竟什么现象需要被解释、应该以什么系统为单位，以及怎样才算解释已经完成。我不预设某一种理论已经垄断了智能的本质，而是把探索锚定在几个互为镜像、能够动手构造与检验的实证切面上：
 
-用 Janelia MaleCNS 的果蝇蘑菇体真实连线（65 个嗅觉小球 → 2,045 个 Kenyon 细胞 → 49 个输出神经元），在隔间与遗忘、持续学习审计（FlyModel）、非平稳气味觅食、果蝇群、元学习与旅行商问题（TSP 三轮）中，预先登记判定标准并冻结文件哈希，检验“真实连线是否优于保度数打乱、随机稀疏或简单线性学习器”。
+```
+                    ┌───────────────────────────────┐
+                    │       探索：智能是什么？       │
+                    └──────────────┬────────────────┘
+                                   │
+         ┌─────────────────────────┼─────────────────────────┐
+         ▼                         ▼                         ▼
+   【具身与形态计算】        【生物回路与演化偏置】    【统计压缩与表征涌现】
+  风力兽实验室 (Jansen)    果蝇连接组研究 (FlyModel)    从零训练小模型 (Tiny-1B)
+  动力学/环境如何代偿大脑？ 真实拓扑是否提供计算先验？ 压缩何时质变为世界模型？
+         │                         │                         │
+         └─────────────────────────┼─────────────────────────┘
+                                   ▼
+                         【符号操作与组合推理】
+                     Agent组合边界诊断 (ACR) / 消歧保真
+                     连续嵌入与离散逻辑的保真边界在哪？
+                                   │
+                                   ▼
+                  【认识论与度量：反自欺与证据驱动】
+              预注册实验协议 · 负结果复盘 · FDE证据驱动交付
+```
+
+---
+
+## 实证研究与工程项目
+
+### 1. 具身与形态计算：风力兽实验室
+
+调整连杆，观察步态，探索设计、仿真与制造之间的关系。**追问的核心问题：智能是否必须先在脑内计算？身体材料、几何连杆与物理环境的耦合，能分担多少传统控制器的计算职责？**
+
+<p align="center">
+  <a href="https://github.com/meiluosi/strandbeest-evolution">
+    <img src="https://raw.githubusercontent.com/meiluosi/strandbeest-evolution/main/docs/assets/walker.gif" alt="风力兽连杆运动示意：多条腿以不同相位交替迈步" width="640" height="300" />
+  </a>
+  <br />
+  <sub>Jansen 连杆运动示意 · 点击动图查看项目与连杆编辑器</sub>
+</p>
+
+**状态：alpha；已有连杆几何编辑器、动力学仿真回放与可打印切片包导出；尚未用真实硬件在非平稳地形验证。**
+
+[看演示与源码](https://github.com/meiluosi/strandbeest-evolution)
+
+### 2. 生物回路与演化偏置：真实果蝇连接组能否当作学习归纳偏置？
+
+用 Janelia MaleCNS 的果蝇蘑菇体真实连线（65 个嗅觉小球 → 2,045 个 Kenyon 细胞 → 49 个输出神经元），在隔间与遗忘、持续学习审计（FlyModel）、非平稳气味觅食、果蝇群、元学习与旅行商问题（TSP 三轮）中，预先登记判定标准并冻结文件哈希，检验“生物演化筛选的真实连线是否优于保度数打乱、随机稀疏或简单线性学习器”。
 
 <p align="center">
   <a href="https://github.com/meiluosi/fly-connectome-study">
@@ -28,23 +72,23 @@
 
 [看实验仓库与独立审查](https://github.com/meiluosi/fly-connectome-study) · [阅读最终总结](https://github.com/meiluosi/fly-connectome-study/blob/main/FINAL_SUMMARY.md) · [7 篇系列文章与配图](https://github.com/meiluosi/fly-connectome-study/blob/main/blog/README.md) · [提炼出的实验写作 Skill](https://github.com/meiluosi/research-writing-skills)
 
-### 风力兽实验室
+### 3. 统计压缩与表征涌现：从零跑通小模型训练全流程
 
-调整连杆，观察步态，探索设计、仿真与制造之间的关系。已有连杆编辑器、仿真回放和打印包导出。
+在个人计算资源（从几万参数到 1B MacBook 本地）上连接数据、分词、随机初始化预训练、SFT、DPO、评测与本地推理。**追问的核心问题：高维参数空间里的自监督预测，在什么临界点从表面统计模式匹配跃迁为具备因果推断能力的隐式模型？小模型在受限计算资源下的表征极限在哪里？**
 
 <p align="center">
-  <a href="https://github.com/meiluosi/strandbeest-evolution">
-    <img src="https://raw.githubusercontent.com/meiluosi/strandbeest-evolution/main/docs/assets/walker.gif" alt="风力兽连杆运动示意：多条腿以不同相位交替迈步" width="640" height="300" />
+  <a href="https://meiluosi.github.io/lab/model-pipeline/">
+    <img src="./assets/llm-training-pipeline.svg" alt="小模型预训练数据工程与全链路训练流水线：语料选型、清洗、质量评分、去重抗污染、中英配比到预训练、SFT与DPO对齐" width="880" />
   </a>
   <br />
-  <sub>Jansen 连杆运动示意 · 点击动图查看项目</sub>
+  <sub>小模型全链路预训练数据工程与对齐流水线 · 点击查看模型工作台与实验记录</sub>
 </p>
 
-**状态：alpha；尚未用真实硬件验证。**
+**状态：已完成 138,560 参数 tiny 模型的工程验证与流水线打通；30M 消融实验与 1B MacBook Air M4 本地实战推进中；系统整理可追溯语料打包与数据工程实践。**
 
-[看演示与源码](https://github.com/meiluosi/strandbeest-evolution)
+[看实现与实验记录](https://github.com/meiluosi/meiluosi.github.io/tree/master/projects/small-model-lab) · [打开模型工作台](https://meiluosi.github.io/lab/model-pipeline/) · [Hugging Face 权重与数据](https://huggingface.co/fengyu116) · [知乎专栏讨论](https://www.zhihu.com/people/feng-chui-guo-de-jie-dao-39)
 
-### 让 Agent 少误读、少在组合边界出故障
+### 4. 符号系统与组合推理：让 Agent 少误读、少在组合边界出故障
 
 写给 Agent 的指令先用中文消歧工具澄清执行者、条件和边界，再用改写保真工具核对数字、字面量、比较方向、否定和语气强度有没有漂移；当多个节点拼成 LangGraph 图之后才坏（子图覆盖父图状态、并行写同一键、返回未声明字段、resume 后重复副作用），用 `acr` 静态扫描与失败轨迹诊断把问题落到**具体文件行号或轨迹事件 ID**。
 
@@ -60,21 +104,29 @@
 
 [查看 Agent 组合边界诊断 (ACR)](https://github.com/meiluosi/agent-composition-review) · [看中文改写前后对照](https://github.com/meiluosi/zh-disambiguate-skill) · [查看改写保真检查](https://github.com/meiluosi/rewrite-fidelity-skill)
 
-### 从零跑通小模型训练流程
+---
 
-在个人电脑上连接数据、分词、随机初始化预训练、SFT、DPO、评测与本地推理，并留下保存恢复和运行记录；系统连载从语料选型地图、网页清洗、质量评分、去重抗污染、中英配比到可追溯语料打包的全套数据工程实践。
+## 正在思考的未解之问 (Open Questions)
 
-<p align="center">
-  <a href="https://meiluosi.github.io/lab/model-pipeline/">
-    <img src="./assets/llm-training-pipeline.svg" alt="小模型预训练数据工程与全链路训练流水线：语料选型、清洗、质量评分、去重抗污染、中英配比到预训练、SFT与DPO对齐" width="880" />
-  </a>
-  <br />
-  <sub>小模型全链路预训练数据工程与对齐流水线 · 点击查看模型工作台与实验记录</sub>
-</p>
+> *“我们不仅公开已经写下的代码与实验记录，更公开记录那些驱动着我们每天动手验证、尚未解决的本质困惑。”*
 
-**状态：已完成 138,560 参数 tiny 模型的工程验证与流水线打通；30M 消融实验与 1B MacBook Air M4 本地实战推进中。**
+### 🤖 关于大模型、表征与认知界限
+1. **压缩的尽头是高级模式检索，还是隐式世界模型？**  
+   语言模型的自监督 Next-Token 预测在信息论上是对人类知识流形的高维有损压缩。然而，**这个压缩过程究竟在什么数学或几何临界点上，会从复杂的表面统计关联跃迁为具备反事实推断与因果外推能力的世界模型？** 我们能否用最小规模的受控合成数据环境，严格测量出这一相变边界？
+2. **组合泛化（Compositionality）与离散符号的保真鸿沟：**  
+   人类认知可以零样本把两个已知规则进行系统性组合，而 Transformer 在处理多步确定性逻辑与长程图遍历时，频现状态退化与概率漂移。**连续的高维向量嵌入空间，在数学上是否天生难以无损保证离散组合逻辑的严格保真？** 神经与符号的真正有机结合点究竟在哪？
+3. **极度受限算力下的小模型极限：数据动力学 vs 参数规模**  
+   在个人算力约束下（从 100K tiny 验证到 1B 本地模型），决定小模型逻辑能力的真正瓶颈究竟是参数容量，还是训练语料的几何拓扑与推理路径密度？小模型能否通过极高密度的精炼数据合成，突破通用大模型的 Scaling 垄断？
 
-[看实现与实验记录](https://github.com/meiluosi/meiluosi.github.io/tree/master/projects/small-model-lab) · [打开模型工作台](https://meiluosi.github.io/lab/model-pipeline/) · [Hugging Face 权重与数据](https://huggingface.co/fengyu116) · [知乎专栏讨论](https://www.zhihu.com/people/feng-chui-guo-de-jie-dao-39)
+### 🦀 关于风力兽、具身形态与物理动力学
+1. **形态计算的代偿极限：纯物理身体能“吃掉”多少计算？**  
+   Jansen 连杆机构仅凭特定比例的刚性杆件几何，就在没有任何传感器和微控制器的情况下“计算”出了近似矩形的平稳步态。**但当面对未知、非平稳地形（如松软沙地、台阶与随机障碍）时，纯被动机械结构的自适应上限在哪里？** 要实现动态环境适应，必须引入的“最小主动神经控制回路”应该介入到连杆拓扑的哪个节点？
+2. **极限环动力学（Limit Cycles）与符号推理的鸿沟：**  
+   风力兽的迈步本质上是相空间中的物理动力学吸引子，是连续的、物理世界与身体的实时耦合；而主流 AI 偏好离散离线推理。**高层的离散目标规划，如何无缝映射到底层的连续动力学吸引子中，而不需要退化回机械式的逆运动学查表？**
+3. **从机械连杆到自维持生命（Autopoiesis）的跨越：**  
+   风力兽被称为“海滩上的机械生命”，但它仍然依赖预先确定的杆件，无法自我修复、自我供能与维持自身组织。**一个具备最小生命自主性（维持自身存在、产生内在动机）的物理系统，其不可削减的最小动力学与物质架构是什么？**
+
+---
 
 ## FDE 实战与证据驱动交付系列
 

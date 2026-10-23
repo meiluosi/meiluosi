@@ -1,8 +1,8 @@
 # Feng Yu / 枫语
 
-**I study AI, and I build tools and simulations. I write down the process, the results, and the limits.**
+**Core Quest: Exploring "What is Intelligence?" — Grounded empirical inquiries at the intersection of embodied mechanics, biological circuits, statistical representations, and symbolic reasoning.**
 
-I care about how models learn, how instructions get read with only one possible interpretation, and how an idea becomes something you can put your hands on and verify.
+Intelligence has no single, monopolized definition. It is neither just scaling curves of loss reduction, nor simply biological wiring, nor pure abstract rules. Traversing cybernetics, connectionism, morphological computing, dynamical systems, and cognitive philosophy, I ask: **How do different forms of intelligence emerge? Where do their physical and computational boundaries lie? And how do we measure them with honest, reproducible experiments that refuse self-deception?**
 
 [Website](https://meiluosi.github.io/) · [Field notes](https://meiluosi.github.io/notes/) · [Lab](https://meiluosi.github.io/lab/) · [Model workbench](https://meiluosi.github.io/lab/model-pipeline/) · [Hugging Face](https://huggingface.co/fengyu116) · [Zhihu](https://www.zhihu.com/people/feng-chui-guo-de-jie-dao-39) · [Email](mailto:1160337988@qq.com) · [中文](README.md)
 
@@ -10,43 +10,72 @@ I care about how models learn, how instructions get read with only one possible 
   <img src="./assets/hero-banner.en.svg" alt="Feng Yu's research and engineering map: preregistered experiments, mechanical simulation, agent composition diagnostics, and evidence-driven FDE delivery" width="880" />
 </p>
 
-## Current work
+## The Inquiry Map & Empirical Anchors
 
-### Can real fly mushroom-body wiring act as an inductive bias for learning and optimization?
+Inquiry into intelligence is not merely a contest of which algorithm scores higher on a leaderboard; it asks what phenomena need explaining, what the unit of analysis should be, and what counts as a completed explanation. Rather than presupposing a single privileged theory, I anchor my work across complementary empirical axes that can be built, simulated, and audited:
 
-Using the Janelia MaleCNS real wiring of the fruit fly mushroom body (65 olfactory glomeruli → 2,045 Kenyon cells → 49 output neurons), I test across five task families whether real wiring beats degree-preserving shuffles, random sparse wiring, or simple linear learners. Decision criteria are preregistered and file hashes are frozen before any run.
+```
+                    ┌───────────────────────────────┐
+                    │  Core Quest: What is Mind?    │
+                    └──────────────┬────────────────┘
+                                   │
+         ┌─────────────────────────┼─────────────────────────┐
+         ▼                         ▼                         ▼
+   [Embodied Mechanics]     [Biological Circuits]      [Statistical Learning]
+   Strandbeest Lab (Jansen) Fly Connectome (FlyModel)  Small-Model Lab (Tiny-1B)
+   Can morphology replace   Does real wiring provide   When does compression become
+   a central controller?    computational bias?        an implicit world model?
+         │                         │                         │
+         └─────────────────────────┼─────────────────────────┘
+                                   ▼
+                       [Symbolic & Compositional]
+                     Agent Composition Review (ACR) / Fidelity
+                     Can discrete reasoning survive composition boundaries?
+                                   │
+                                   ▼
+                     [Epistemology & Measurements]
+              Preregistered protocols · Negative result audits · FDE Evidence
+```
 
-**Status: in every setting that could actually be tested, real wiring showed no measured advantage over random sparse wiring or simple linear learners. That is "no evidence under the current setting", not "proof that real wiring carries no computational value". The meta-learning arm was first missed because the forgetting rate was parameterized to a start point in the flat tail; after fixing the start point it was re-run across 100 new worlds, and the correction is published rather than quietly patched.**
+---
 
-[Experiment repo and independent review](https://github.com/meiluosi/fly-connectome-study) · [Final summary](https://github.com/meiluosi/fly-connectome-study/blob/main/FINAL_SUMMARY.md) · [The 11-part series with figures](https://github.com/meiluosi/fly-connectome-study/blob/main/blog/README.md) · [The experiment-writing skill extracted from it](https://github.com/meiluosi/research-writing-skills)
+## Empirical Research & Engineering Projects
 
-### Strandbeest lab
+### 1. Embodied & Morphological Computing: Strandbeest Lab
 
-Adjust the linkage, watch the gait, and explore how design, simulation, and manufacturing relate. There is a linkage editor, simulation playback, and a printable-part export.
+Adjust the linkage, watch the gait, and explore how design, simulation, and manufacturing relate. **Core question: Must intelligence always be computed in a centralized brain first? How much computational burden can linkage geometry, structural compliance, and physics-environment coupling absorb?**
 
 <p align="center">
   <a href="https://github.com/meiluosi/strandbeest-evolution">
     <img src="https://raw.githubusercontent.com/meiluosi/strandbeest-evolution/main/docs/assets/walker.gif" alt="Strandbeest linkage motion: several legs stepping with different phases" width="640" height="300" />
   </a>
   <br />
-  <sub>Jansen linkage motion · click for the project</sub>
+  <sub>Jansen linkage motion · click to view the project and linkage editor</sub>
 </p>
 
-**Status: alpha; not yet validated against real hardware.**
+**Status: alpha; includes an interactive linkage editor, dynamical simulation playback, and slice-ready part export; not yet validated on real physical hardware over non-stationary terrain.**
 
 [See the demo and the source](https://github.com/meiluosi/strandbeest-evolution)
 
-### Fewer agent misreadings, fewer failures at composition boundaries
+### 2. Biological Circuits & Inductive Biases: Real Fly Connectome Study
 
-Instructions written for agents are first clarified with a Chinese disambiguation tool that pins down the executor, the conditions, and the boundaries; a rewrite-fidelity tool then checks that numbers, literals, comparison direction, negation, and modal strength have not drifted. When several nodes are assembled into a LangGraph graph and only then break — a subgraph overwriting parent state, two parallel writes to one key, a node returning undeclared fields, a repeated side effect after resume — `acr` static scanning and failure-trace diagnostics put the problem on **a specific file line or trace event ID**.
+Using the Janelia MaleCNS real wiring of the fruit fly mushroom body (65 olfactory glomeruli → 2,045 Kenyon cells → 49 output neurons), I test across five task families whether evolutionarily preserved wiring beats degree-preserving shuffles, random sparse wiring, or simple linear learners. Decision criteria are preregistered and file hashes are frozen before any run.
 
-**Status: `agent-composition-review` is in v0.6.0 maintenance mode (features frozen; the focus is real false positives, compatibility, and documentation; no production accuracy is claimed). Disambiguation and fidelity checks still need human judgment beyond mechanical comparison.**
+<p align="center">
+  <a href="https://github.com/meiluosi/fly-connectome-study">
+    <img src="./assets/fly-connectome-anim.svg" alt="Fruit fly mushroom-body connectome preregistered verification: 65 olfactory glomeruli to 2045 Kenyon cells to 49 output neurons, comparing against shuffled and random sparse controls" width="880" />
+  </a>
+  <br />
+  <sub>MaleCNS mushroom-body circuits and five testing tracks · click for preregistered protocols, review, and code</sub>
+</p>
 
-[Agent composition diagnostics (ACR)](https://github.com/meiluosi/agent-composition-review) · [Chinese rewrite, before and after](https://github.com/meiluosi/zh-disambiguate-skill) · [Rewrite fidelity check](https://github.com/meiluosi/rewrite-fidelity-skill)
+**Status & Conclusion: in every setting that could actually be tested, real wiring showed no measured advantage over random sparse wiring or simple linear learners. That is "no evidence under the current setting", not "proof that real wiring carries no computational value". The meta-learning arm was first missed because the forgetting rate was parameterized to a start point in the flat tail; after fixing the start point it was re-run across 100 new worlds, and the correction is published rather than quietly patched.**
 
-### Running a small-model training pipeline from scratch
+[Experiment repo and independent review](https://github.com/meiluosi/fly-connectome-study) · [Final summary](https://github.com/meiluosi/fly-connectome-study/blob/main/FINAL_SUMMARY.md) · [The 11-part series with figures](https://github.com/meiluosi/fly-connectome-study/blob/main/blog/README.md) · [The experiment-writing skill extracted from it](https://github.com/meiluosi/research-writing-skills)
 
-On a personal computer: data, tokenization, random-init pretraining, SFT, DPO, evaluation, and local inference, with checkpoint saving, resuming, and run records kept along the way. A serialized body of work covers the whole data-engineering path — corpus selection maps, web cleaning, quality scoring, deduplication and decontamination, Chinese/English mixing ratios, and traceable corpus packaging.
+### 3. Statistical Compression & Emergence: Small-Model Training from Scratch
+
+On a personal computer: data, tokenization, random-init pretraining, SFT, DPO, evaluation, and local inference. **Core question: At what mathematical or geometric threshold does next-token prediction shift from surface-level n-gram pattern matching to an implicit world model capable of counterfactual inference? What are the representational limits of small models under strict compute constraints?**
 
 <p align="center">
   <a href="https://meiluosi.github.io/lab/model-pipeline/">
@@ -56,9 +85,49 @@ On a personal computer: data, tokenization, random-init pretraining, SFT, DPO, e
   <sub>Data engineering and the alignment pipeline · open the model workbench and the run records</sub>
 </p>
 
-**Status: the engineering path is verified end to end on a 138,560-parameter tiny model; a 30M ablation and a 1B local run on MacBook Air M4 are in progress.**
+**Status: verified end to end on a 138,560-parameter tiny model; a 30M ablation and a 1B local run on MacBook Air M4 are in progress; serialized practice on reproducible data engineering.**
 
 [Implementation and run records](https://github.com/meiluosi/meiluosi.github.io/tree/master/projects/small-model-lab) · [Open the model workbench](https://meiluosi.github.io/lab/model-pipeline/) · [Hugging Face weights and data](https://huggingface.co/fengyu116) · [Discussion on Zhihu](https://www.zhihu.com/people/feng-chui-guo-de-jie-dao-39)
+
+### 4. Symbolic Systems & Compositional Reasoning: Agent Diagnostics & Boundary Review
+
+Instructions written for agents are first clarified with a Chinese disambiguation tool that pins down the executor, the conditions, and the boundaries; a rewrite-fidelity tool then checks that numbers, literals, comparison direction, negation, and modal strength have not drifted. When several nodes are assembled into a LangGraph graph and only then break (subgraphs overwriting state, race conditions, undeclared fields, resume side-effects), `acr` static scanning and failure-trace diagnostics pin the problem to **a specific file line or trace event ID**.
+
+<p align="center">
+  <a href="https://github.com/meiluosi/agent-composition-review">
+    <img src="./assets/acr-boundary-anim.svg" alt="Agent instruction disambiguation and LangGraph composition boundary failure diagnostics" width="880" />
+  </a>
+  <br />
+  <sub>Instruction disambiguation & fidelity + LangGraph composition boundary static/trace diagnostics · click to inspect ACR</sub>
+</p>
+
+**Status: `agent-composition-review` is in v0.6.0 maintenance mode (features frozen; focus is on real false positives and compatibility; no production accuracy is claimed). Disambiguation and fidelity checks still need human judgment beyond mechanical comparison.**
+
+[Agent composition diagnostics (ACR)](https://github.com/meiluosi/agent-composition-review) · [Chinese rewrite, before and after](https://github.com/meiluosi/zh-disambiguate-skill) · [Rewrite fidelity check](https://github.com/meiluosi/rewrite-fidelity-skill)
+
+---
+
+## Open Questions We Are Investigating
+
+> *"We publish not only the tools and records we have finished, but also the unresolved questions that drive our daily work."*
+
+### 🤖 On Large Models, Representation & Cognitive Boundaries
+1. **Does compression yield advanced associative retrieval, or an implicit world model?**  
+   Self-supervised next-token prediction is, in an information-theoretic sense, lossy compression of human knowledge manifolds. **At what mathematical or topological phase transition does this compression shift from complex statistical retrieval to an implicit world model capable of systematic counterfactuals?** Can we strictly measure this transition in minimal, controlled synthetic environments?
+2. **Compositionality vs. Continuous Embedding Noise:**  
+   Human cognition systematically composes known rules out-of-distribution with zero shots. In contrast, Transformers navigating multi-step deterministic graphs frequently suffer state degradation and probabilistic drift. **Does continuous high-dimensional vector space inherently struggle to guarantee discrete logical fidelity?** Where is the true organic interface between connectionist intuition and symbolic verification?
+3. **Small-Model Limits under Constrained Compute: Data Dynamics vs. Parameter Scaling**  
+   Under personal compute constraints (from 100K tiny models to 1B local runs), what is the true bottleneck for reasoning: parameter volume, or the geometric density and causal paths of the training data? Can high-density synthetic reasoning corpora bypass the scaling monopoly of frontier models?
+
+### 🦀 On Strandbeests, Embodiment & Physical Dynamics
+1. **The Limits of Morphological Computation: How much 'brain' can physics absorb?**  
+   The Jansen linkage computes a near-rectangular, terrain-clearing gait purely through the geometry of rigid bars, without sensors, microcontrollers, or closed-loop code. **When facing non-stationary, irregular terrain (loose sand, steps, random obstacles), where does purely passive morphological adaptation break down?** Where must a minimal active neural control loop intervene in the linkage graph?
+2. **Limit Cycle Attractors vs. Symbolic Planning:**  
+   A Strandbeest's locomotion is a continuous limit cycle attractor in physical phase space, tightly coupled with its environment. Mainstream AI favors discrete tokenized steps. **How can high-level discrete symbolic goals map continuously into low-level dynamical attractors without collapsing into rigid inverse-kinematics lookup tables?**
+3. **From Mechanical Kinematics to Autopoiesis:**  
+   Theo Jansen called his creations 'beach animals', yet they remain static linkage assemblies incapable of self-maintenance, repair, or internal homeostasis. **What constitutes the irreducible minimum architecture for an embodied agent to exhibit true biological autonomy (maintaining its own existence and generating intrinsic motivation)?**
+
+---
 
 ## FDE field delivery series
 
